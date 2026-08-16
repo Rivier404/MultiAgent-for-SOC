@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# SOC Dataset / Large Log Files
+Data/Processed/Network_Logs/
+Data/Processed/Web_Logs/
