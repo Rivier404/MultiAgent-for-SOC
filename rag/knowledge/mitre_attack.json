@@ -1,0 +1,1182 @@
+{
+  "schema_version": 1,
+  "source": {
+    "title": "MITRE ATT&CK Enterprise Matrix (Curated SOC Micro-chunks with LOLBAS, OWASP & D3FEND)",
+    "version": "v16",
+    "url": "https://attack.mitre.org/"
+  },
+  "documents": [
+    {
+      "id": "mitre_attack.json#T1059.001",
+      "technique_id": "T1059.001",
+      "name": "Command and Scripting Interpreter: PowerShell",
+      "tactic": "Execution",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "powershell",
+        "powershell.exe",
+        "-enc",
+        "-encodedcommand",
+        "downloadstring",
+        "executionpolicy bypass",
+        "-w hidden",
+        "4688",
+        "sysmon 1"
+      ],
+      "content": "Adversaries abuse PowerShell for code execution and lateral movement. Key Indicators: Base64 encoded commands (-enc), bypass execution policy (-ep bypass), hidden windows (-w hidden), WebClient download cradles (IWR, Net.WebClient). Common Event IDs: 4688, Sysmon 1. D3FEND Countermeasures: Process Termination, Script Execution Analysis."
+    },
+    {
+      "id": "mitre_attack.json#T1059.003",
+      "technique_id": "T1059.003",
+      "name": "Command and Scripting Interpreter: Windows Command Shell",
+      "tactic": "Execution",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "cmd",
+        "cmd.exe",
+        "batch",
+        "/c",
+        "whoami",
+        "systeminfo",
+        "net user",
+        "4688",
+        "sysmon 1"
+      ],
+      "content": "Adversaries abuse cmd.exe to execute commands, discovery scripts, or launch payloads. Key Indicators: cmd.exe spawning from non-interactive parents (w3wp.exe, sqlservr.exe, winword.exe), rapid reconnaissance commands (/c whoami, net user, ipconfig /all). D3FEND Countermeasures: Process Spawn Analysis, Execution Isolation."
+    },
+    {
+      "id": "mitre_attack.json#T1055",
+      "technique_id": "T1055",
+      "name": "Process Injection",
+      "tactic": "Defense Evasion, Privilege Escalation",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "process injection",
+        "hollowing",
+        "virtualallocex",
+        "createremotethread",
+        "writeprocessmemory",
+        "sysmon 8",
+        "sysmon 10"
+      ],
+      "content": "Adversaries inject code into running processes to evade defenses and elevate privileges. Key Indicators: Unusual target processes (explorer.exe, svchost.exe, lsass.exe) accessed by unsigned binaries; cross-process memory allocation. Sysmon Event ID 8, 10. D3FEND Countermeasures: Process Memory Extraction, Process Termination."
+    },
+    {
+      "id": "mitre_attack.json#T1003.001",
+      "technique_id": "T1003.001",
+      "name": "OS Credential Dumping: LSASS Memory",
+      "tactic": "Credential Access",
+      "domains": [
+        "endpoint",
+        "ad"
+      ],
+      "topics": [
+        "lsass",
+        "lsass.exe",
+        "credential dumping",
+        "mimikatz",
+        "procdump",
+        "comsvcs.dll",
+        "sysmon 10",
+        "4673"
+      ],
+      "content": "Adversaries attempt to dump plaintext passwords, hashes, and Kerberos tickets from LSASS process memory. Key Indicators: Memory minidump of lsass.exe (comsvcs.dll MiniDump, procdump.exe, mimikatz, rundll32.exe), PROCESS_VM_READ access rights on lsass.exe. D3FEND Countermeasures: Credential Eviction, Host Isolation, LSA Protection Enablement."
+    },
+    {
+      "id": "mitre_attack.json#T1003.002",
+      "technique_id": "T1003.002",
+      "name": "OS Credential Dumping: Security Account Manager (SAM)",
+      "tactic": "Credential Access",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "sam",
+        "system",
+        "reg save",
+        "credential dumping",
+        "hklm\\sam",
+        "vssadmin"
+      ],
+      "content": "Adversaries extract password hashes of local accounts by copying the SAM registry hive. Key Indicators: Commands like 'reg save HKLM\\SAM', 'reg save HKLM\\SYSTEM', or accessing shadow copies to read SAM files. D3FEND Countermeasures: File Access Revocation, Local Account Password Rotation."
+    },
+    {
+      "id": "mitre_attack.json#T1547.001",
+      "technique_id": "T1547.001",
+      "name": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
+      "tactic": "Persistence, Privilege Escalation",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "registry",
+        "run",
+        "runonce",
+        "startup",
+        "persistence",
+        "currentversion\\run",
+        "sysmon 13"
+      ],
+      "content": "Adversaries achieve persistence by writing payloads into Windows Run/RunOnce registry keys or Startup folder. Key Indicators: Modification of HKLM/HKCU Software\\Microsoft\\Windows\\CurrentVersion\\Run pointing to binaries in %TEMP% or %APPDATA%. Sysmon 12/13. D3FEND Countermeasures: Registry Entry Eviction, File Quarantine."
+    },
+    {
+      "id": "mitre_attack.json#T1053.005",
+      "technique_id": "T1053.005",
+      "name": "Scheduled Task/Job: Scheduled Task",
+      "tactic": "Execution, Persistence, Privilege Escalation",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "scheduled task",
+        "schtasks",
+        "schtasks.exe",
+        "persistence",
+        "4698",
+        "4702"
+      ],
+      "content": "Adversaries create scheduled tasks to execute payloads periodically or at system boot. Key Indicators: schtasks.exe /create with SYSTEM privileges, scripts or executables in non-standard locations, Windows Security Event ID 4698 (task created). D3FEND Countermeasures: Scheduled Task Eviction, Service Disablement."
+    },
+    {
+      "id": "mitre_attack.json#T1543.003",
+      "technique_id": "T1543.003",
+      "name": "Create or Modify System Process: Windows Service",
+      "tactic": "Persistence, Privilege Escalation",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "service",
+        "service install",
+        "7045",
+        "4697",
+        "sc.exe",
+        "psexec",
+        "persistence"
+      ],
+      "content": "Adversaries create or modify Windows services to execute malicious code as SYSTEM. Key Indicators: Event ID 7045 or 4697, sc.exe create command, binary path pointing to %TEMP% or network share. Frequently used by PsExec and lateral movement tools. D3FEND Countermeasures: Service Binary Removal, Service Termination."
+    },
+    {
+      "id": "mitre_attack.json#T1486",
+      "technique_id": "T1486",
+      "name": "Data Encrypted for Impact (Ransomware)",
+      "tactic": "Impact",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "ransomware",
+        "encryption",
+        "encrypted files",
+        "vssadmin",
+        "shadowcopy",
+        "bcedit",
+        "wbadmin"
+      ],
+      "content": "Adversaries encrypt files on target systems to disrupt availability and demand ransom. Key Indicators: Rapid mass file modification, shadow copy deletion via 'vssadmin delete shadows /all /quiet', disabling Windows recovery ('bcdedit /set default bootstatuspolicy ignoreallfailures'). D3FEND Countermeasures: System Isolation, Volume Shadow Restore, Process Termination."
+    },
+    {
+      "id": "mitre_attack.json#T1562.001",
+      "technique_id": "T1562.001",
+      "name": "Impair Defenses: Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "disable antivirus",
+        "defender",
+        "windefend",
+        "fltmc",
+        "1102",
+        "cleared log",
+        "tampering"
+      ],
+      "content": "Adversaries disable or tamper with security software, EDR sensors, or audit logs to evade detection. Key Indicators: Stopping WinDefend, unloading mini-filter drivers ('fltmc unload'), clearing Security event log (Event ID 1102), disabling AMSI. D3FEND Countermeasures: Host Isolation, Security Agent Reinstallation, Audit Log Lock."
+    },
+    {
+      "id": "mitre_attack.json#T1218.011",
+      "technique_id": "T1218.011",
+      "name": "System Binary Proxy Execution: Rundll32 (LOLBAS)",
+      "tactic": "Defense Evasion",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "rundll32",
+        "rundll32.exe",
+        "lolbas",
+        "dll execution",
+        "4688",
+        "sysmon 1"
+      ],
+      "content": "Adversaries abuse rundll32.exe to execute malicious code contained inside DLLs or scripts, bypassing application whitelisting. Key Indicators: rundll32.exe calling suspicious export functions (DllRegisterServer, #1) on DLLs in AppData, or executing inline script URLs (javascript:, vbscript:). D3FEND Countermeasures: Process Termination, Binary Whitelisting."
+    },
+    {
+      "id": "mitre_attack.json#T1218.005",
+      "technique_id": "T1218.005",
+      "name": "System Binary Proxy Execution: Mshta (LOLBAS)",
+      "tactic": "Defense Evasion",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "mshta",
+        "mshta.exe",
+        "hta",
+        "lolbas",
+        "vbscript",
+        "4688",
+        "sysmon 1"
+      ],
+      "content": "Adversaries abuse mshta.exe to execute malicious HTML Applications (.hta), VBScript, or JScript payloads directly from remote URLs or command line. Key Indicators: mshta.exe executing inline javascript/vbscript or downloading remote .hta files over HTTP/HTTPS. D3FEND Countermeasures: Process Termination, Network Inbound Filtering."
+    },
+    {
+      "id": "mitre_attack.json#T1105",
+      "technique_id": "T1105",
+      "name": "Ingress Tool Transfer (LOLBAS: Certutil / Bitsadmin)",
+      "tactic": "Command and Control",
+      "domains": [
+        "endpoint",
+        "network"
+      ],
+      "topics": [
+        "certutil",
+        "certutil.exe",
+        "bitsadmin",
+        "urlcache",
+        "split",
+        "download",
+        "ingress tool transfer",
+        "lolbas"
+      ],
+      "content": "Adversaries transfer tools and malware into the environment using native Windows utilities. Key Indicators: 'certutil.exe -urlcache -split -f http...', 'bitsadmin.exe /transfer ...', or curl/wget from command line. D3FEND Countermeasures: Host Network Isolation, Outbound HTTP Filtering."
+    },
+    {
+      "id": "mitre_attack.json#T1036",
+      "technique_id": "T1036",
+      "name": "Masquerading",
+      "tactic": "Defense Evasion",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "masquerading",
+        "svchost.exe",
+        "lsass.exe",
+        "typosquatting",
+        "fake process"
+      ],
+      "content": "Adversaries disguise malicious executables and services as legitimate system binaries to avoid suspicion. Key Indicators: Known system filenames (svchost.exe, lsass.exe, csrss.exe) running outside C:\\Windows\\System32 (e.g., in %TEMP%, %APPDATA%, Public), or subtle typos (scvhost.exe). D3FEND Countermeasures: Process Path Verification, Digital Signature Validation."
+    },
+    {
+      "id": "mitre_attack.json#T1078",
+      "technique_id": "T1078",
+      "name": "Valid Accounts: Compromised Credentials",
+      "tactic": "Initial Access, Persistence, Privilege Escalation",
+      "domains": [
+        "ad",
+        "endpoint"
+      ],
+      "topics": [
+        "valid accounts",
+        "compromised user",
+        "4624",
+        "logon type 3",
+        "logon type 10",
+        "rdp",
+        "lateral movement"
+      ],
+      "content": "Adversaries obtain and abuse legitimate credentials to gain access, move laterally, or maintain persistence. Key Indicators: Event ID 4624 with unusual logon types (Type 3 network logon, Type 10 RDP) from unfamiliar IP addresses or at anomalous times. D3FEND Countermeasures: Credential Revocation, Multi-Factor Authentication Enforcement."
+    },
+    {
+      "id": "mitre_attack.json#T1110.001",
+      "technique_id": "T1110.001",
+      "name": "Brute Force: Password Guessing",
+      "tactic": "Credential Access",
+      "domains": [
+        "ad",
+        "endpoint"
+      ],
+      "topics": [
+        "brute force",
+        "password guessing",
+        "4625",
+        "logon failure",
+        "0xC000006A",
+        "repeated attempts"
+      ],
+      "content": "Adversaries repeatedly guess passwords for target accounts. Key Indicators: High volume of Windows Event ID 4625 failures for a single username from a single source IP in a short window (Status 0xC000006A: bad password). D3FEND Countermeasures: Account Locking, Source IP Inbound Filtering."
+    },
+    {
+      "id": "mitre_attack.json#T1110.003",
+      "technique_id": "T1110.003",
+      "name": "Brute Force: Password Spraying",
+      "tactic": "Credential Access",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "password spray",
+        "password spraying",
+        "4625",
+        "distributed logon failure",
+        "single password"
+      ],
+      "content": "Adversaries attempt a single common password against many different user accounts to evade account lockout thresholds. Key Indicators: Event ID 4625 failures distributed across dozens or hundreds of distinct usernames from one or few source IPs. D3FEND Countermeasures: Account Policy Lockout Hardening, Threat Intelligence Blocking."
+    },
+    {
+      "id": "mitre_attack.json#T1558.003",
+      "technique_id": "T1558.003",
+      "name": "Steal or Forge Kerberos Tickets: Kerberoasting",
+      "tactic": "Credential Access",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "kerberoasting",
+        "4769",
+        "ticket granting service",
+        "tgs request",
+        "rc4",
+        "spn",
+        "serviceprincipalname"
+      ],
+      "content": "Adversaries request Kerberos TGS tickets for Service Principal Names (SPNs) and crack them offline to extract service account passwords. Key Indicators: Windows Event ID 4769 with Ticket Encryption Type 0x17 (RC4-HMAC) requested by a standard domain user for multiple service accounts. D3FEND Countermeasures: Service Account Password Rotation, AES Kerberos Enforcement."
+    },
+    {
+      "id": "mitre_attack.json#T1558.004",
+      "technique_id": "T1558.004",
+      "name": "Steal or Forge Kerberos Tickets: AS-REP Roasting",
+      "tactic": "Credential Access",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "as-rep roasting",
+        "4768",
+        "tgt request",
+        "dontreqpreauth",
+        "pre-authentication"
+      ],
+      "content": "Adversaries request Kerberos TGTs for user accounts that have 'Do not require Kerberos preauthentication' enabled, cracking the encrypted response offline. Key Indicators: Windows Event ID 4768 where pre-authentication type is 0 or empty for non-service accounts. D3FEND Countermeasures: Require Kerberos Preauthentication, Strong Password Policy."
+    },
+    {
+      "id": "mitre_attack.json#T1098",
+      "technique_id": "T1098",
+      "name": "Account Manipulation",
+      "tactic": "Persistence, Privilege Escalation",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "account manipulation",
+        "4728",
+        "4738",
+        "domain admins",
+        "member added",
+        "privileged group"
+      ],
+      "content": "Adversaries modify existing accounts or group memberships to gain elevated privileges and maintain persistent access. Key Indicators: Event ID 4728 (Member added to security group, e.g., Domain Admins), Event ID 4738 (User account altered: password reset, SPN added). D3FEND Countermeasures: Group Membership Audit, Immediate Account Demotion."
+    },
+    {
+      "id": "mitre_attack.json#T1069.002",
+      "technique_id": "T1069.002",
+      "name": "Permission Groups Discovery: Domain Groups",
+      "tactic": "Discovery",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "domain groups",
+        "net group",
+        "domain admins",
+        "bloodhound",
+        "ldap query",
+        "reconnaissance"
+      ],
+      "content": "Adversaries enumerate domain groups and members to locate privileged users and escalation targets. Key Indicators: Rapid LDAP queries to Domain Controller, 'net group \"Domain Admins\" /domain', BloodHound/SharpHound execution. D3FEND Countermeasures: Active Directory Auditing, Network Segmentation."
+    },
+    {
+      "id": "mitre_attack.json#T1484.001",
+      "technique_id": "T1484.001",
+      "name": "Domain Policy Modification: Group Policy Modification",
+      "tactic": "Defense Evasion, Persistence, Privilege Escalation",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "gpo",
+        "group policy",
+        "5136",
+        "5145",
+        "sysvol",
+        "gpo abuse"
+      ],
+      "content": "Adversaries modify Group Policy Objects (GPOs) to deploy backdoors, create scheduled tasks, or disable defenses across domain-joined systems. Key Indicators: Event ID 5136 (Directory Service Object Modified) targeting GPOs, unauthorized file creation in SYSVOL share (Event 5145). D3FEND Countermeasures: GPO Version Rollback, Domain Admin Access Review."
+    },
+    {
+      "id": "mitre_attack.json#T1550.002",
+      "technique_id": "T1550.002",
+      "name": "Use Alternate Authentication Material: Pass the Hash",
+      "tactic": "Lateral Movement",
+      "domains": [
+        "ad",
+        "endpoint"
+      ],
+      "topics": [
+        "pass the hash",
+        "pth",
+        "ntlm",
+        "4624",
+        "logon type 3",
+        "secur32",
+        "credential reuse"
+      ],
+      "content": "Adversaries authenticate using extracted NTLM hashes without needing the plaintext password. Key Indicators: Event ID 4624 Type 3 logons from workstations to servers where NTLM authentication package is used instead of Kerberos, often across multiple hosts concurrently. D3FEND Countermeasures: Restrict NTLM, Enable Credential Guard."
+    },
+    {
+      "id": "mitre_attack.json#T1071.001",
+      "technique_id": "T1071.001",
+      "name": "Application Layer Protocol: Web Protocols (C2 Beaconing)",
+      "tactic": "Command and Control",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "c2",
+        "beaconing",
+        "http c2",
+        "https c2",
+        "dest_port=443",
+        "dest_port=80",
+        "regular interval",
+        "user-agent"
+      ],
+      "content": "Adversaries communicate with external C2 servers using standard HTTP/HTTPS traffic to blend in with legitimate web activity. Key Indicators: Periodic outbound beaconing requests (fixed sleep/jitter), requests to non-categorized/dynamic domains, unusual User-Agent strings. D3FEND Countermeasures: Traffic Decryption/Inspection, Outbound IP/Domain Filtering."
+    },
+    {
+      "id": "mitre_attack.json#T1071.004",
+      "technique_id": "T1071.004",
+      "name": "Application Layer Protocol: DNS (DNS Tunneling / C2)",
+      "tactic": "Command and Control",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "dns tunneling",
+        "dns c2",
+        "port 53",
+        "txt query",
+        "long domain",
+        "dga"
+      ],
+      "content": "Adversaries use DNS queries to transmit data, bypass firewalls, or receive C2 instructions. Key Indicators: Abnormally high volume of DNS TXT/NULL queries, extremely long subdomains with high entropy, unexpected external DNS servers contacted directly. D3FEND Countermeasures: DNS Sinkholing, DNS Query Length Limitation."
+    },
+    {
+      "id": "mitre_attack.json#T1041",
+      "technique_id": "T1041",
+      "name": "Exfiltration Over C2 Channel",
+      "tactic": "Exfiltration",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "data exfiltration",
+        "exfil",
+        "large upload",
+        "c2",
+        "data loss",
+        "outbound spike"
+      ],
+      "content": "Adversaries steal sensitive organizational data and transfer it out of the network over established C2 connections. Key Indicators: Sudden surge in outbound bytes transmitted over existing sessions, anomalous large POST/PUT requests to unfamiliar destinations. D3FEND Countermeasures: Outbound Bandwidth Throttling, Session Termination."
+    },
+    {
+      "id": "mitre_attack.json#T1046",
+      "technique_id": "T1046",
+      "name": "Network Service Discovery (Port Scanning)",
+      "tactic": "Discovery",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "port scan",
+        "syn scan",
+        "recon",
+        "reconnaissance",
+        "port 445",
+        "port 3389",
+        "port 22",
+        "conn_state=REJ"
+      ],
+      "content": "Adversaries probe internal or external IP ranges to find accessible services and vulnerable open ports. Key Indicators: Single source IP contacting many distinct destination ports or IP addresses in seconds, high volume of REJ/RST connection states. D3FEND Countermeasures: Network Traffic Rate Limiting, Dynamic Firewall Blacklisting."
+    },
+    {
+      "id": "mitre_attack.json#T1571",
+      "technique_id": "T1571",
+      "name": "Non-Standard Port",
+      "tactic": "Command and Control",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "non-standard port",
+        "ssh port 443",
+        "rdp port 80",
+        "unusual port",
+        "protocol mismatch"
+      ],
+      "content": "Adversaries route network protocols through non-standard ports (e.g., SSH or RDP over port 443) to evade port-based firewall restrictions. Key Indicators: Traffic inspection reveals protocol mismatch with standard port assignments (e.g., non-TLS traffic on port 443). D3FEND Countermeasures: Deep Packet Inspection, Protocol Validation."
+    },
+    {
+      "id": "mitre_attack.json#T1090",
+      "technique_id": "T1090",
+      "name": "Proxy / Multi-hop Proxy (Internal Pivoting)",
+      "tactic": "Command and Control",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "proxy",
+        "socks proxy",
+        "chisel",
+        "pivot",
+        "pivoting",
+        "internal proxy"
+      ],
+      "content": "Adversaries route traffic through intermediate systems (SOCKS proxies, Chisel tunnels) to obfuscate their origin or reach segmented internal subnets. Key Indicators: Internal workstation relaying high volumes of bidirectional traffic to other internal hosts on uncommon high-numbered ports. D3FEND Countermeasures: Internal Network Segmentation, Proxy Authentication."
+    },
+    {
+      "id": "mitre_attack.json#T1190",
+      "technique_id": "T1190",
+      "name": "Exploit Public-Facing Application: Web Vulnerabilities (OWASP SQLi / RCE)",
+      "tactic": "Initial Access",
+      "domains": [
+        "web"
+      ],
+      "topics": [
+        "sqli",
+        "sql injection",
+        "union select",
+        "xp_cmdshell",
+        "or 1=1",
+        "rce",
+        "remote code execution",
+        "owasp",
+        "web attack"
+      ],
+      "content": "Adversaries exploit web application vulnerabilities to extract database records or execute commands on the underlying server. Key Indicators: HTTP requests containing SQL injection syntax (' OR '1'='1', UNION SELECT, sleep(), @@version), followed by HTTP 200/500 responses with database error fragments. D3FEND Countermeasures: Input Validation, WAF Rule Enforcement, Database Query Parameterization."
+    },
+    {
+      "id": "mitre_attack.json#T1190.001",
+      "technique_id": "T1190",
+      "name": "Exploit Public-Facing Application: Command Injection (OWASP A03)",
+      "tactic": "Initial Access, Execution",
+      "domains": [
+        "web"
+      ],
+      "topics": [
+        "command injection",
+        "rce",
+        "; whoami",
+        "| id",
+        "&& net user",
+        "system()",
+        "exec()",
+        "uri",
+        "http"
+      ],
+      "content": "Adversaries inject shell metacharacters into web input fields or query parameters to execute OS commands. Key Indicators: Query string, headers, or POST body containing '; whoami', '| cat /etc/passwd', '`id`', '&& ipconfig'. D3FEND Countermeasures: Input Parameter Sanitization, Web Application Sandboxing."
+    },
+    {
+      "id": "mitre_attack.json#T1190.002",
+      "technique_id": "T1190",
+      "name": "Exploit Public-Facing Application: Path Traversal / LFI (OWASP A01)",
+      "tactic": "Initial Access, Collection",
+      "domains": [
+        "web"
+      ],
+      "topics": [
+        "path traversal",
+        "directory traversal",
+        "lfi",
+        "../",
+        "..\\",
+        "/etc/passwd",
+        "win.ini",
+        "boot.ini",
+        "uri"
+      ],
+      "content": "Adversaries manipulate URI paths to access sensitive system files outside the web document root. Key Indicators: Request URIs containing '../..', '..%2f..%2f', '/etc/passwd', 'C:\\Windows\\win.ini'. D3FEND Countermeasures: Chroot Jail, Path Normalization and Validation."
+    },
+    {
+      "id": "mitre_attack.json#T1190.003",
+      "technique_id": "T1190",
+      "name": "Exploit Public-Facing Application: Server-Side Request Forgery (OWASP A10 SSRF)",
+      "tactic": "Initial Access, Discovery",
+      "domains": [
+        "web",
+        "network"
+      ],
+      "topics": [
+        "ssrf",
+        "169.254.169.254",
+        "metadata",
+        "localhost",
+        "127.0.0.1",
+        "aws metadata",
+        "cloud metadata"
+      ],
+      "content": "Adversaries coerce a web application to send requests to internal resources or cloud metadata services. Key Indicators: Parameters containing internal IPs (127.0.0.1, 10.0.0.0/8) or cloud metadata endpoints ('http://169.254.169.254/latest/meta-data/'). D3FEND Countermeasures: Outbound HTTP Proxy Whitelisting, Disable IMDSv1."
+    },
+    {
+      "id": "mitre_attack.json#T1505.003",
+      "technique_id": "T1505.003",
+      "name": "Server Software Component: Web Shell",
+      "tactic": "Persistence, Privilege Escalation",
+      "domains": [
+        "web",
+        "endpoint"
+      ],
+      "topics": [
+        "webshell",
+        "web shell",
+        "b374k",
+        "c99",
+        "chopper",
+        "aspx",
+        "php",
+        "jsp",
+        "post /",
+        "status_code=200"
+      ],
+      "content": "Adversaries upload backdoor scripts (.aspx, .php, .jsp) to web server directories to maintain persistent interactive access. Key Indicators: New scripts created in inetpub/wwwroot or /var/www, high frequency of HTTP POST requests to unusual script files with short execution intervals. D3FEND Countermeasures: Web Directory Write Restriction, File Integrity Monitoring."
+    },
+    {
+      "id": "mitre_attack.json#T1133",
+      "technique_id": "T1133",
+      "name": "External Remote Services (VPN / Exposed RDP)",
+      "tactic": "Initial Access, Persistence",
+      "domains": [
+        "web",
+        "network"
+      ],
+      "topics": [
+        "vpn",
+        "rdp",
+        "port 3389",
+        "remote services",
+        "unauthorized access",
+        "external access"
+      ],
+      "content": "Adversaries connect to internal network resources via external-facing VPNs, Citrix portals, or exposed RDP services. Key Indicators: Successful external RDP/VPN logons from abnormal geolocations, or without required MFA verification. D3FEND Countermeasures: Multi-Factor Authentication, Geoblocking."
+    },
+    {
+      "id": "mitre_attack.json#T1566.001",
+      "technique_id": "T1566.001",
+      "name": "Phishing: Spearphishing Attachment",
+      "tactic": "Initial Access",
+      "domains": [
+        "endpoint",
+        "ad"
+      ],
+      "topics": [
+        "phishing",
+        "spearphishing",
+        "malicious attachment",
+        "macro",
+        "xlsm",
+        "docm",
+        "iso",
+        "lnk",
+        "payload"
+      ],
+      "content": "Adversaries send spearphishing emails with malicious file attachments (Office documents with macros, ISO images, shortcut .lnk files) to execute code when opened by the recipient. Key Indicators: Suspicious email attachments spawning child processes (excel.exe spawning cmd.exe or powershell.exe). D3FEND Countermeasures: Email Attachment Filtering, Macro Execution Disablement."
+    },
+    {
+      "id": "mitre_attack.json#T1566.002",
+      "technique_id": "T1566.002",
+      "name": "Phishing: Spearphishing Link",
+      "tactic": "Initial Access, Credential Access",
+      "domains": [
+        "web",
+        "network",
+        "ad"
+      ],
+      "topics": [
+        "phishing link",
+        "credential harvesting",
+        "fake login",
+        "m365 login",
+        "typosquatting",
+        "evilginx"
+      ],
+      "content": "Adversaries send emails or messages with links leading victims to credential harvesting websites or direct drive-by downloads. Key Indicators: Outbound HTTP traffic to newly registered domains mimicking corporate SSO or Microsoft 365 login portals, reverse proxy AitM activity. D3FEND Countermeasures: URL Content Inspection, FIDO2/MFA Enforcement."
+    },
+    {
+      "id": "mitre_attack.json#T1574.002",
+      "technique_id": "T1574.002",
+      "name": "Hijack Execution Flow: DLL Side-Loading",
+      "tactic": "Defense Evasion, Persistence, Privilege Escalation",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "dll sideloading",
+        "dll side-loading",
+        "dll hijacking",
+        "unsigned dll",
+        "trusted binary"
+      ],
+      "content": "Adversaries execute their own malicious payloads by placing a spoofed DLL alongside a legitimate, signed executable that inadvertently loads it due to search order hijacking. Key Indicators: Legitimate executables running from non-standard directories (%APPDATA%, %TEMP%) loading unsigned DLLs with standard names. D3FEND Countermeasures: File Integrity Monitoring, DLL Signature Verification."
+    },
+    {
+      "id": "mitre_attack.json#T1560",
+      "technique_id": "T1560",
+      "name": "Archive Collected Data (7z / WinRAR / ZIP)",
+      "tactic": "Collection",
+      "domains": [
+        "endpoint",
+        "network"
+      ],
+      "topics": [
+        "archive",
+        "7z",
+        "7za.exe",
+        "rar",
+        "zip",
+        "password-protected",
+        "compress",
+        "staging"
+      ],
+      "content": "Adversaries compress or encrypt collected files into archives (e.g., .7z, .zip, .rar) using command-line tools to ease exfiltration and evade DLP controls. Key Indicators: Execution of 7z.exe, rar.exe with flags like 'a -p' (password encryption) targeting document and database folders. D3FEND Countermeasures: Process Spawn Monitoring, Data Loss Prevention Policy."
+    },
+    {
+      "id": "mitre_attack.json#T1087",
+      "technique_id": "T1087",
+      "name": "Account Discovery (Local and Domain)",
+      "tactic": "Discovery",
+      "domains": [
+        "endpoint",
+        "ad"
+      ],
+      "topics": [
+        "account discovery",
+        "whoami",
+        "whoami /priv",
+        "whoami /all",
+        "net user",
+        "quser",
+        "reconnaissance"
+      ],
+      "content": "Adversaries enumerate local or domain accounts to establish target privileges and assess security context. Key Indicators: Rapid sequence of discovery commands like 'whoami /priv', 'whoami /groups', 'net user', 'quser', or PowerShell Get-LocalUser. D3FEND Countermeasures: Decoy Account Deployment, User Behavior Analytics."
+    },
+    {
+      "id": "mitre_attack.json#T1018",
+      "technique_id": "T1018",
+      "name": "Remote System Discovery (Network Reconnaissance)",
+      "tactic": "Discovery",
+      "domains": [
+        "endpoint",
+        "network"
+      ],
+      "topics": [
+        "remote system discovery",
+        "net view",
+        "arp -a",
+        "ping sweep",
+        "nltest",
+        "network recon"
+      ],
+      "content": "Adversaries enumerate remote systems and domain controllers to identify high-value pivot targets. Key Indicators: Commands like 'net view', 'arp -a', 'nltest /dclist:', or PowerShell Get-ADComputer executed shortly after initial compromise. D3FEND Countermeasures: Network Microsegmentation, Network Topology Hiding."
+    },
+    {
+      "id": "mitre_attack.json#T1003.006",
+      "technique_id": "T1003.006",
+      "name": "OS Credential Dumping: DCSync",
+      "tactic": "Credential Access",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "dcsync",
+        "ds-replication-get-changes-all",
+        "4662",
+        "mimikatz",
+        "lsadump::dcsync",
+        "directory replication",
+        "krbtgt"
+      ],
+      "content": "Adversaries simulate domain controller replication behavior to extract password hashes from Active Directory without code execution on DCs. Key Indicators: Event ID 4662 with access mask 0x100 (Control Access) and Extended Rights GUIDs for DS-Replication-Get-Changes-All (1131f6aa-9c07-11d1-f79f-00c04fc2dcd2) requested by non-DC computer/user accounts. D3FEND Countermeasures: Active Directory Auditing, Account Credential Rotation, Privileged Access Management."
+    },
+    {
+      "id": "mitre_attack.json#T1558.001",
+      "technique_id": "T1558.001",
+      "name": "Steal or Forge Kerberos Tickets: Golden Ticket",
+      "tactic": "Credential Access, Persistence, Privilege Escalation",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "golden ticket",
+        "krbtgt",
+        "ticket granting ticket",
+        "tgt forgery",
+        "4769",
+        "kerberos ticket",
+        "mimikatz"
+      ],
+      "content": "Adversaries forge Kerberos Ticket Granting Tickets (TGTs) using the KRBTGT account NTLM hash or AES key, granting unlimited access to all domain services. Key Indicators: Event ID 4769 with unusual ticket lifetimes (e.g., 10 years), RC4 encryption requested when AES is standard, or domain logon without preceding Event ID 4768 (TGT request). D3FEND Countermeasures: KRBTGT Password Double Reset, Domain Controller Replication Hardening."
+    },
+    {
+      "id": "mitre_attack.json#T1558.002",
+      "technique_id": "T1558.002",
+      "name": "Steal or Forge Kerberos Tickets: Silver Ticket",
+      "tactic": "Credential Access, Lateral Movement, Privilege Escalation",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "silver ticket",
+        "tgs forgery",
+        "service ticket forgery",
+        "cifs",
+        "http",
+        "spn hash",
+        "4769 bypass"
+      ],
+      "content": "Adversaries forge Kerberos Ticket Granting Service (TGS) tickets for specific target services using the compromised service account hash, bypassing the Domain Controller entirely. Key Indicators: Service access attempts without any corresponding Event 4769 on Domain Controllers; anomalous PAC validation failures in target server event logs. D3FEND Countermeasures: Service Account Password Rotation, Kerberos PAC Validation Enforcement."
+    },
+    {
+      "id": "mitre_attack.json#T1550.003",
+      "technique_id": "T1550.003",
+      "name": "Use Alternate Authentication Material: Pass the Ticket",
+      "tactic": "Lateral Movement",
+      "domains": [
+        "ad",
+        "endpoint"
+      ],
+      "topics": [
+        "pass the ticket",
+        "ptt",
+        "kirbi",
+        "ticket injection",
+        "klist",
+        "mimikatz kerberos::ptt",
+        "4624"
+      ],
+      "content": "Adversaries inject stolen Kerberos tickets (TGT or TGS) into the current logon session memory using tools like Mimikatz or Rubeus to access network resources without possessing the plaintext password or NTLM hash. Key Indicators: Event ID 4624 Type 3 logons with mismatch between Client Name and Account Name; unexpected use of klist or memory manipulation in LSASS. D3FEND Countermeasures: Credential Guard Enablement, Session Purging."
+    },
+    {
+      "id": "mitre_attack.json#T1098.004",
+      "technique_id": "T1098.004",
+      "name": "Account Manipulation: SSH Authorized Keys / Shadow Credentials",
+      "tactic": "Persistence, Privilege Escalation",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "shadow credentials",
+        "msds-keycredentiallink",
+        "whisker",
+        "pywhisker",
+        "pkinit",
+        "5136",
+        "certificate abuse"
+      ],
+      "content": "Adversaries populate the msDS-KeyCredentialLink attribute on a target AD user or computer object to enable PKINIT authentication and obtain Kerberos TGTs as that identity without changing their password. Key Indicators: Windows Event ID 5136 showing modifications to attribute msDS-KeyCredentialLink by non-administrative accounts. D3FEND Countermeasures: Active Directory Attribute Auditing, Shadow Credential Removal."
+    },
+    {
+      "id": "mitre_attack.json#T1047",
+      "technique_id": "T1047",
+      "name": "Windows Management Instrumentation (WMI)",
+      "tactic": "Execution, Persistence",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "wmi",
+        "wmic",
+        "wmic.exe",
+        "process call create",
+        "wmi event",
+        "subscription",
+        "5861",
+        "sysmon 19",
+        "sysmon 20",
+        "sysmon 21"
+      ],
+      "content": "Adversaries abuse WMI to execute malicious commands, query system status, or establish persistence via WMI Event Subscriptions (__EventFilter, __EventConsumer). Key Indicators: wmic.exe process call create commands, Event ID 5861 in WMI-Activity/Operational, or Sysmon Event IDs 19, 20, 21. D3FEND Countermeasures: WMI Event Consumer Eviction, Process Spawn Analysis."
+    },
+    {
+      "id": "mitre_attack.json#T1059.005",
+      "technique_id": "T1059.005",
+      "name": "Command and Scripting Interpreter: Visual Basic / VBScript (WScript / CScript)",
+      "tactic": "Execution",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "wscript",
+        "wscript.exe",
+        "cscript",
+        "cscript.exe",
+        "vbs",
+        "vbe",
+        "js",
+        "jscript",
+        "4688",
+        "sysmon 1"
+      ],
+      "content": "Adversaries execute malicious scripts (.vbs, .js, .vbe) using the native Windows Script Host (wscript.exe / cscript.exe), often delivered as email attachments or download cradle payloads. Key Indicators: wscript.exe or cscript.exe executing scripts from %TEMP%, %APPDATA%, or network shares with hidden window switches. D3FEND Countermeasures: Disallow WScript Association, Script Execution Analysis."
+    },
+    {
+      "id": "mitre_attack.json#T1021.002",
+      "technique_id": "T1021.002",
+      "name": "Remote Services: SMB/Windows Admin Shares",
+      "tactic": "Lateral Movement",
+      "domains": [
+        "endpoint",
+        "ad"
+      ],
+      "topics": [
+        "smb",
+        "admin shares",
+        "admin$",
+        "c$",
+        "ipc$",
+        "psexec",
+        "5140",
+        "5145",
+        "lateral movement",
+        "port 445"
+      ],
+      "content": "Adversaries move laterally across the network by connecting to administrative network shares (C$, ADMIN$, IPC$) over SMB (port 445) to drop binaries and execute services or scheduled tasks. Key Indicators: Event ID 5140 and 5145 recording access to ADMIN$ or C$ followed immediately by service creation (Event ID 7045) or process execution. D3FEND Countermeasures: Disable File and Printer Sharing, Restrict SMB Port 445, Disable Administrative Shares."
+    },
+    {
+      "id": "mitre_attack.json#T1021.001",
+      "technique_id": "T1021.001",
+      "name": "Remote Services: Remote Desktop Protocol (RDP)",
+      "tactic": "Lateral Movement",
+      "domains": [
+        "endpoint",
+        "network"
+      ],
+      "topics": [
+        "rdp",
+        "remote desktop",
+        "mstsc",
+        "mstsc.exe",
+        "port 3389",
+        "4624",
+        "logon type 10",
+        "tscon",
+        "session hijacking"
+      ],
+      "content": "Adversaries connect to interactive graphical sessions on remote systems using RDP, or hijack existing disconnected RDP sessions using tscon.exe without authentication. Key Indicators: Windows Event ID 4624 with Logon Type 10 (RemoteInteractive) from internal IP addresses, tscon.exe process execution with elevated privileges. D3FEND Countermeasures: Multi-Factor Authentication for RDP, Restrict RDP via Host Firewalls, Network Level Authentication (NLA) Enforcement."
+    },
+    {
+      "id": "mitre_attack.json#T1548.002",
+      "technique_id": "T1548.002",
+      "name": "Abuse Elevation Control Mechanism: Bypass User Account Control (UAC)",
+      "tactic": "Privilege Escalation, Defense Evasion",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "uac bypass",
+        "fodhelper",
+        "eventvwr",
+        "sdclt",
+        "computerdefaults",
+        "high integrity",
+        "registry hijack",
+        "4688"
+      ],
+      "content": "Adversaries bypass Windows UAC to elevate a process from medium to high integrity without prompting the user, by abusing auto-elevating binaries and registry key hijacking (e.g. fodhelper.exe, sdclt.exe, eventvwr.exe). Key Indicators: Registry modifications under HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command or HKCU\\Software\\Classes\\mscfile followed immediately by auto-elevating system binary execution. D3FEND Countermeasures: Set UAC to Always Notify, Remove Administrative Privileges from Standard Users."
+    },
+    {
+      "id": "mitre_attack.json#T1070.001",
+      "technique_id": "T1070.001",
+      "name": "Indicator Removal: Clear Windows Event Logs",
+      "tactic": "Defense Evasion",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "clear logs",
+        "wevtutil",
+        "1102",
+        "104",
+        "log tampering",
+        "eventlog clear",
+        "clearing logs"
+      ],
+      "content": "Adversaries clear Windows event logs to destroy evidence of their activities, intrusion vectors, and lateral movement traces. Key Indicators: Windows Security Event ID 1102 ('The audit log was cleared') or System Event ID 104 ('The log-file was cleared'), execution of 'wevtutil.exe cl <logname>' or PowerShell 'Clear-EventLog'. D3FEND Countermeasures: Centralized Remote Log Shipping (SIEM/Syslog), Host Isolation, Immediate Incident Response Escalation."
+    },
+    {
+      "id": "mitre_attack.json#T1112",
+      "technique_id": "T1112",
+      "name": "Modify Registry",
+      "tactic": "Defense Evasion, Persistence",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "modify registry",
+        "reg add",
+        "reg delete",
+        "tampering",
+        "disablerealtimemonitoring",
+        "consentpromptbehavioradmin",
+        "sysmon 13"
+      ],
+      "content": "Adversaries modify the Windows Registry to disable security features (Defender real-time monitoring, LSA protection, UAC prompt), hide artifacts, or establish persistence. Key Indicators: Execution of reg.exe with 'add /v DisableRealtimeMonitoring /t REG_DWORD /d 1', or modifying SafeBoot/Terminal Server settings. Sysmon Event ID 13. D3FEND Countermeasures: Registry Auditing, Group Policy Enforcement of Security Baseline."
+    },
+    {
+      "id": "mitre_attack.json#T1095",
+      "technique_id": "T1095",
+      "name": "Non-Application Layer Protocol: ICMP / Raw Socket Tunneling",
+      "tactic": "Command and Control",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "icmp tunneling",
+        "ping tunneling",
+        "icmpsh",
+        "raw socket",
+        "covert channel",
+        "echo request payload"
+      ],
+      "content": "Adversaries encapsulate command-and-control communication or exfiltrated data within non-application layer protocols such as ICMP Echo Request/Reply packets to bypass layer-7 inspection. Key Indicators: Abnormally high volume of ICMP traffic to external destinations, oversized ICMP payloads (>64 bytes), repetitive ping packets with fluctuating non-default payload bytes. D3FEND Countermeasures: Perimeter ICMP Inspection/Blocking, Outbound ICMP Payload Filtering."
+    },
+    {
+      "id": "mitre_attack.json#T1572",
+      "technique_id": "T1572",
+      "name": "Protocol Tunneling (SSH / Chisel / Ngrok / Cloudflared)",
+      "tactic": "Command and Control",
+      "domains": [
+        "network",
+        "endpoint"
+      ],
+      "topics": [
+        "protocol tunneling",
+        "ssh tunnel",
+        "plink",
+        "ngrok",
+        "cloudflared",
+        "chisel",
+        "reverse tunnel",
+        "covert tunnel"
+      ],
+      "content": "Adversaries tunnel network communications through authorized protocols or third-party reverse tunnel utilities (Ngrok, Cloudflared, Plink, Chisel) to evade firewall ingress rules and expose internal ports externally. Key Indicators: Outbound connections to known reverse proxy services (.ngrok-free.app, .trycloudflare.com) or persistent outbound SSH connections initiated by non-administrative user endpoints. D3FEND Countermeasures: DNS Filtering of Tunneling Services, Perimeter Protocol Validation, Application Whitelisting."
+    },
+    {
+      "id": "mitre_attack.json#T1498",
+      "technique_id": "T1498",
+      "name": "Network Denial of Service (SYN Flood / UDP Amplification)",
+      "tactic": "Impact",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "dos",
+        "ddos",
+        "syn flood",
+        "udp flood",
+        "amplification",
+        "ntp amplification",
+        "dns amplification",
+        "bandwidth exhaustion"
+      ],
+      "content": "Adversaries flood network interfaces or services with high volumes of traffic (e.g. TCP SYN floods, DNS/NTP reflection/amplification) to degrade service availability for legitimate users. Key Indicators: Inbound packet rate spikes orders of magnitude above baseline, high concentration of half-open TCP connections (SYN_RECV), saturated ingress link bandwidth. D3FEND Countermeasures: SYN Cookie Enablement, Upstream DDoS Mitigation, Inbound Rate Limiting."
+    },
+    {
+      "id": "mitre_attack.json#T1059.007",
+      "technique_id": "T1059.007",
+      "name": "JavaScript: Cross-Site Scripting (Stored / Reflected XSS - OWASP A03)",
+      "tactic": "Initial Access, Collection",
+      "domains": [
+        "web"
+      ],
+      "topics": [
+        "xss",
+        "cross-site scripting",
+        "<script>",
+        "document.cookie",
+        "stored xss",
+        "reflected xss",
+        "owasp",
+        "javascript injection"
+      ],
+      "content": "Adversaries inject malicious scripts into web pages viewed by other users, allowing session token theft, DOM manipulation, or forced actions on behalf of the victim. Key Indicators: Web requests containing script tags ('<script>', 'onerror=alert()', 'javascript:'), suspicious query parameters reflected unescaped in HTTP responses, cookie exfiltration calls to third-party endpoints. D3FEND Countermeasures: Context-Aware Output Encoding, Content Security Policy (CSP), HttpOnly Cookie Flag Enforcement."
+    },
+    {
+      "id": "mitre_attack.json#T1190.004",
+      "technique_id": "T1190.004",
+      "name": "Exploit Public-Facing Application: Insecure Deserialization (OWASP A08)",
+      "tactic": "Initial Access, Execution",
+      "domains": [
+        "web"
+      ],
+      "topics": [
+        "deserialization",
+        "ysoserial",
+        "pickle",
+        "unserialize",
+        "java deserialization",
+        "rce",
+        "serialized object"
+      ],
+      "content": "Adversaries exploit flawed deserialization routines in web frameworks (Java, Python, PHP, .NET) by submitting crafted serialized objects containing gadget chains to achieve remote code execution. Key Indicators: Base64-encoded Java serialized objects (starting with 'rO0AB'), Python pickle payloads, or PHP 'O:8:...', followed immediately by process execution under the web server worker (w3wp.exe, java, php-fpm). D3FEND Countermeasures: Avoid Deserializing Untrusted Data, Look-Ahead Deserialization Class Filters."
+    },
+    {
+      "id": "mitre_attack.json#T1190.005",
+      "technique_id": "T1190.005",
+      "name": "Exploit Public-Facing Application: XML External Entity (XXE) Injection (OWASP A05)",
+      "tactic": "Initial Access, Collection",
+      "domains": [
+        "web"
+      ],
+      "topics": [
+        "xxe",
+        "xml external entity",
+        "<!entity",
+        "system",
+        "file:///",
+        "oob xxe",
+        "xml parsing"
+      ],
+      "content": "Adversaries exploit weakly configured XML parsers by submitting XML input containing references to external entities, enabling internal file disclosure, SSRF, or denial of service. Key Indicators: Inbound XML POST bodies or headers containing '<!DOCTYPE', '<!ENTITY xxe SYSTEM \"file:///etc/passwd\"'>, or requests triggering out-of-band HTTP/DNS callbacks to attacker servers. D3FEND Countermeasures: Disable DTD Processing and External Entities in XML Parsers."
+    },
+    {
+      "id": "mitre_attack.json#T1595.002",
+      "technique_id": "T1595.002",
+      "name": "Active Scanning: Vulnerability Scanning / Web Reconnaissance",
+      "tactic": "Reconnaissance",
+      "domains": [
+        "web",
+        "network"
+      ],
+      "topics": [
+        "vulnerability scan",
+        "nikto",
+        "acunetix",
+        "sqlmap",
+        "nuclei",
+        "burp suite",
+        "gobuster",
+        "dirbuster",
+        "404 spike"
+      ],
+      "content": "Adversaries execute automated scanners to probe web applications for known vulnerabilities, misconfigurations, and hidden directories. Key Indicators: Bursts of hundreds to thousands of HTTP requests with known scanner User-Agents (Nikto, sqlmap, Nuclei) or rapid 404/403 status code spikes probing common paths (/admin, /.env, /wp-admin, /actuator). D3FEND Countermeasures: Automated WAF Rate Limiting, IP Reputation Blocking, Honeypot / Decoy Path Monitoring."
+    }
+  ]
+}

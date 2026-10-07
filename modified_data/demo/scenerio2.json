@@ -1,0 +1,9 @@
+[
+  {"domain":"ad","event_code":4625,"description":"single failed logon","username":"demo-user","source_ip":"10.10.10.25"},
+  {"domain":"endpoint","event_code":4688,"description":"new process created","process":"cmd.exe","host":"ws-01"},
+  {"domain":"network","source_ip":"10.10.10.25","dest_ip":"10.10.10.8","dest_port":443,"protocol":"tcp","raw_log":"conn_state=SF normal HTTPS connection"},
+  {"domain":"web","method":"GET","uri":"/","status_code":200,"source_ip":"10.10.10.25","raw_log":"normal HTTP request"},
+  {"domain":"endpoint","description":"malicious process execution demonstrated on a user workstation","process":"demo_payload.exe","host":"ws-02"},
+  {"domain":"endpoint","description":"privilege escalation succeeded and persistence was established on the test host","host":"lab-host"},
+  {"domain":"endpoint","description":"ransomware encrypted files on multiple critical assets in the isolated simulation","host":"lab-critical"}
+]
