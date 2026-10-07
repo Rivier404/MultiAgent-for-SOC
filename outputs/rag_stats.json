@@ -1,0 +1,20 @@
+{
+  "knowledge_root": "E:\\GUI\\AI_Multi_Agent_SOC_MULTI_MODEL_API\\rag\\knowledge",
+  "count_by_kind": {
+    "playbook": 160,
+    "nist": 7,
+    "attack": 60,
+    "sigma": 80
+  },
+  "playbook_ids": [
+    "IRP-AccountCompromised",
+    "IRP-Critical",
+    "IRP-DataLoss",
+    "IRP-Malware",
+    "IRP-Phishing",
+    "IRP-Ransom"
+  ],
+  "indexed_docs": 307,
+  "relevance_threshold": 0.075,
+  "playbook_relevance_threshold": 0.09
+}

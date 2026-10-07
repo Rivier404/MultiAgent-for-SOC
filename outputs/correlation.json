@@ -1,0 +1,15 @@
+{
+  "agent": "CorrelationAgent",
+  "event_code": null,
+  "impact_score": 0,
+  "severity": "LOW",
+  "verdict": "insufficient_evidence",
+  "reasoning": "The supplied records do not establish a strong cross-event progression.",
+  "evidence": [],
+  "recommended_actions": [
+    "Use the retrieved playbook section to validate scope and the next response step."
+  ],
+  "playbook_references": [
+    "IRP-AccountCompromised/README.md#Scope"
+  ]
+}

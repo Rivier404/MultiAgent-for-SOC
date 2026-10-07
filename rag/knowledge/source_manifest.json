@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {"name":"SOCFortress Playbooks attachment","sha256":"7d8d0bf8130391642d2686a1c0a8b6ad0fdefdaf8812fa8833d82b76ff279512","use":"Six selected IRP README files are normalized into playbooks.json; empty/generic product files, templates, images and repository-only material are excluded from runtime RAG."},
+    {"name":"NIST SP 800-61r3 attachment","sha256":"e5593d6bb85daecec7e8d9549400c7b3473bcc3f06e469c82218073afa7fba2d","use":"Selected incident-analysis, correlation, impact/scope, prioritization and playbook guidance is normalized into nist_ir.json."},
+    {"name":"Sigma Rules detection catalog","url":"https://github.com/SigmaHQ/sigma","use":"Eighty candidate Windows security and system event IDs with compiled Sigma detection signatures normalized into sigma_rules.json."},
+    {"name":"CABTA attachment","sha256":"72595f64f7a2c7537b40956da599a242be41f0703d40feb44099afa6df298061","use":"Architecture reference for modular agents, bounded ReAct-style control flow, separation of concerns and fail-safe behavior; its application/web code is not bundled into the SOC core."},
+    {"name":"Microsoft Learn shortcut attachment","sha256":"d14d99ec4ae8834a21003dcf6dd957311a6d67ce32209adab2193bcf7bc3f930","url":"https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/","use":"Authoritative vendor domain. scripts/update_event_ids_from_microsoft.py performs live page verification when internet access is available."},
+    {"name":"MITRE ATT&CK Enterprise Matrix","url":"https://attack.mitre.org/","use":"Curated core enterprise techniques with LOLBAS, OWASP, and D3FEND cross-references normalized into mitre_attack.json for runtime TTP grounding."}
+  ]
+}

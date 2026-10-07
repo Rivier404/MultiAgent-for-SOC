@@ -1,0 +1,20 @@
+{
+  "4625": {
+    "name": "An account failed to log on",
+    "description": null,
+    "category": "Authentication",
+    "domains": ["ad", "endpoint"],
+    "source": "Microsoft Learn",
+    "source_url": "https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4625",
+    "verification_status": "offline_seed_requires_live_refresh"
+  },
+  "4688": {
+    "name": "A new process has been created",
+    "description": null,
+    "category": "Process Creation",
+    "domains": ["endpoint"],
+    "source": "Microsoft Learn",
+    "source_url": "https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4688",
+    "verification_status": "offline_seed_requires_live_refresh"
+  }
+}
