@@ -1,0 +1,1371 @@
+{
+  "schema_version": 1,
+  "source": {
+    "title": "SigmaHQ Rules Detections (Compiled from 80 candidate events)",
+    "url": "https://github.com/SigmaHQ/sigma",
+    "total_event_ids": 80
+  },
+  "documents": [
+    {
+      "id": "sigma_rules.json#7045",
+      "event_id": "7045",
+      "name": "Event 7045 - Service Installation",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "7045",
+        "service install",
+        "psexec",
+        "remcom",
+        "persistence",
+        "binpath",
+        "privilege escalation"
+      ],
+      "sigma_rule_count": 41,
+      "content": "Windows Event 7045: A new service was installed. Sigma Detections: Service binary path pointing to %TEMP%, %APPDATA%, %PUBLIC%, or network share; service executing powershell/cmd.exe; service names matching PsExec, RemCom, Cobalt Strike, or random strings. High indicator of lateral movement or persistence."
+    },
+    {
+      "id": "sigma_rules.json#4697",
+      "event_id": "4697",
+      "name": "Event 4697 - Service Installation Attempt with Audit",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "4697",
+        "service install",
+        "impacket",
+        "metasploit",
+        "credential dumper",
+        "security audit"
+      ],
+      "sigma_rule_count": 21,
+      "content": "Windows Event 4697: A service was attempted to be installed with security auditing. Sigma Detections: Metasploit/Impacket PsExec service installation, malicious credential dumper registration, or obfuscated service names."
+    },
+    {
+      "id": "sigma_rules.json#5145",
+      "event_id": "5145",
+      "name": "Event 5145 - Network Share Object Access",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "5145",
+        "smb",
+        "admin share",
+        "c$",
+        "admin$",
+        "ipc$",
+        "lateral movement",
+        "sysvol"
+      ],
+      "sigma_rule_count": 17,
+      "content": "Windows Event 5145: Detailed network share object check. Sigma Detections: Access to administrative shares (ADMIN$, C$, IPC$) from non-admin accounts, staging executable/batch scripts in SYSVOL or GPO startup directories."
+    },
+    {
+      "id": "sigma_rules.json#4624",
+      "event_id": "4624",
+      "name": "Event 4624 - Successful Account Logon",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4624",
+        "logon",
+        "logon type 3",
+        "logon type 10",
+        "metasploit",
+        "rottenpotato",
+        "lateral movement"
+      ],
+      "sigma_rule_count": 15,
+      "content": "Windows Event 4624: An account successfully logged on. Sigma Detections: Metasploit authentication, RottenPotato privilege escalation, anomalous Logon Type 3 (network) or Type 10 (RDP) from untrusted workstations."
+    },
+    {
+      "id": "sigma_rules.json#4663",
+      "event_id": "4663",
+      "name": "Event 4663 - Attempt to Access Object",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "4663",
+        "object access",
+        "lsass",
+        "sam",
+        "wceaux",
+        "mimikatz",
+        "aadhealth"
+      ],
+      "sigma_rule_count": 14,
+      "content": "Windows Event 4663: An attempt was made to access a securable object. Sigma Detections: Unauthorized processes accessing LSASS or SAM registry keys, WCeaux/Mimikatz activity, accessing ISO mount files."
+    },
+    {
+      "id": "sigma_rules.json#4656",
+      "event_id": "4656",
+      "name": "Event 4656 - Handle to Object Requested",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "4656",
+        "handle requested",
+        "lsass",
+        "sdelete",
+        "file access",
+        "deletion"
+      ],
+      "sigma_rule_count": 12,
+      "content": "Windows Event 4656: A handle to an object was requested. Sigma Detections: Access requests to critical security processes (LSASS, Winlogon), SDelete secure file wiping patterns, tampering with Defender registry keys."
+    },
+    {
+      "id": "sigma_rules.json#5136",
+      "event_id": "5136",
+      "name": "Event 5136 - Directory Service Object Modified",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "5136",
+        "gpo",
+        "active directory",
+        "gpo modified",
+        "attribute change",
+        "sid history"
+      ],
+      "sigma_rule_count": 12,
+      "content": "Windows Event 5136: A directory service object was modified. Sigma Detections: Unauthorized changes to Active Directory Group Policy Objects, modification of user SID History, or alteration of sensitive group ACLs."
+    },
+    {
+      "id": "sigma_rules.json#4662",
+      "event_id": "4662",
+      "name": "Event 4662 - Operation Performed on Directory Object",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4662",
+        "ad recon",
+        "bloodhound",
+        "sharphound",
+        "extended rights",
+        "directory object"
+      ],
+      "sigma_rule_count": 7,
+      "content": "Windows Event 4662: An operation was performed on an Active Directory object. Sigma Detections: BloodHound/SharpHound mass enumeration of domain objects, DCSync rights exploration, Certificate template enumeration."
+    },
+    {
+      "id": "sigma_rules.json#3008",
+      "event_id": "3008",
+      "name": "Event 3008 - Code Integrity / Driver Filter",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "3008",
+        "code integrity",
+        "driver block",
+        "print spooler",
+        "unsigned driver"
+      ],
+      "sigma_rule_count": 6,
+      "content": "Windows Event 3008: Code integrity driver or print spooler filter warning. Sigma Detections: Unsigned or revoked kernel drivers attempting to load, vulnerable driver exploitation (BYOVD)."
+    },
+    {
+      "id": "sigma_rules.json#4657",
+      "event_id": "4657",
+      "name": "Event 4657 - Registry Value Modified",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "4657",
+        "registry modified",
+        "defender exclusion",
+        "ntlm downgrade",
+        "sysmon tampering"
+      ],
+      "sigma_rule_count": 6,
+      "content": "Windows Event 4657: A registry value was modified. Sigma Detections: Adding Windows Defender exclusions (Exclusions\\Paths), NetNTLM downgrade attacks (LmCompatibilityLevel), disabling Sysmon logging channels."
+    },
+    {
+      "id": "sigma_rules.json#4720",
+      "event_id": "4720",
+      "name": "Event 4720 - User Account Created",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4720",
+        "user created",
+        "hidden user",
+        "local account",
+        "backdoor user"
+      ],
+      "sigma_rule_count": 5,
+      "content": "Windows Event 4720: A user account was created. Sigma Detections: Creation of hidden user accounts (ending in $), unauthorized local accounts created during off-hours, or accounts created by non-administrative users."
+    },
+    {
+      "id": "sigma_rules.json#16403",
+      "event_id": "16403",
+      "name": "Event 16403 - BITS Client New Transfer",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "16403",
+        "bits",
+        "bitsadmin",
+        "download",
+        "uncommon tld",
+        "file sharing"
+      ],
+      "sigma_rule_count": 5,
+      "content": "Windows Event 16403: Background Intelligent Transfer Service (BITS) started a new transfer job. Sigma Detections: BITS downloading from raw IP addresses, uncommon TLDs, or public file sharing domains."
+    },
+    {
+      "id": "sigma_rules.json#5007",
+      "event_id": "5007",
+      "name": "Event 5007 - Windows Defender Configuration Changed",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "5007",
+        "defender",
+        "tampering",
+        "exploit guard",
+        "realtime disabled",
+        "antivirus"
+      ],
+      "sigma_rule_count": 5,
+      "content": "Windows Event 5007: Windows Defender configuration was altered. Sigma Detections: Exploit Guard tampering, disabling Real-time Protection or Behavioral Monitoring, modifying Antivirus scanning exclusions."
+    },
+    {
+      "id": "sigma_rules.json#33205",
+      "event_id": "33205",
+      "name": "Event 33205 - MS SQL Audit Record",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "33205",
+        "mssql",
+        "sql server",
+        "xp_cmdshell",
+        "sysadmin",
+        "audit disabled"
+      ],
+      "sigma_rule_count": 5,
+      "content": "Windows Event 33205: Microsoft SQL Server audit event. Sigma Detections: Execution of xp_cmdshell extended stored procedure, adding accounts to sysadmin fixed server role, disabling database audit specifications."
+    },
+    {
+      "id": "sigma_rules.json#4625",
+      "event_id": "4625",
+      "name": "Event 4625 - Account Failed to Log On",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4625",
+        "logon failure",
+        "failed logon",
+        "bad password",
+        "brute force",
+        "0xC000006A"
+      ],
+      "sigma_rule_count": 4,
+      "content": "Windows Event 4625: An account failed to log on. Sigma Detections: Multiple consecutive logon failures (Status 0xC000006A: bad password, 0xC0000234: locked out), Metasploit automated login attempts, Ruler Exchange exploit."
+    },
+    {
+      "id": "sigma_rules.json#854",
+      "event_id": "854",
+      "name": "Event 854 - AppX Package in Staging",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "854",
+        "appx",
+        "staging",
+        "sideloading",
+        "uncommon location"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 854: AppX deployment server package staged. Sigma Detections: AppX package staged from suspicious user directories (%TEMP%, %APPDATA%) or downloaded from public file sharing sites."
+    },
+    {
+      "id": "sigma_rules.json#4738",
+      "event_id": "4738",
+      "name": "Event 4738 - User Account Modified",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4738",
+        "user modified",
+        "sid history",
+        "weak encryption",
+        "ad backdoor",
+        "des"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 4738: A user account was modified. Sigma Detections: Adding SID History to user account (persistence), enabling weak DES encryption on Kerberos accounts, configuring Kerberos unconstrained delegation."
+    },
+    {
+      "id": "sigma_rules.json#5379",
+      "event_id": "5379",
+      "name": "Event 5379 - Credential Manager Access",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "5379",
+        "credential manager",
+        "encrypted zip",
+        "vault",
+        "outlook zip"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 5379: Access to Windows Credential Manager or reading encrypted archive files. Sigma Detections: Suspicious extraction of credentials from Windows Vault or opening password-protected archives in Outlook."
+    },
+    {
+      "id": "sigma_rules.json#4776",
+      "event_id": "4776",
+      "name": "Event 4776 - NTLM Authentication Validation",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4776",
+        "ntlm",
+        "validation",
+        "pass the hash",
+        "failed ntlm"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 4776: The domain controller validated credentials using NTLM. Sigma Detections: Pass-the-Hash authentication surges, failed NTLM validation attempts across domain accounts."
+    },
+    {
+      "id": "sigma_rules.json#4661",
+      "event_id": "4661",
+      "name": "Event 4661 - SAM or LSA Object Access",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4661",
+        "sam",
+        "lsa",
+        "password policy",
+        "reconnaissance",
+        "account discovery"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 4661: A handle to SAM or LSA object was opened. Sigma Detections: Password policy enumeration by non-admin users, net.exe recon activity, LSA secret discovery."
+    },
+    {
+      "id": "sigma_rules.json#4768",
+      "event_id": "4768",
+      "name": "Event 4768 - Kerberos TGT Request",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4768",
+        "kerberos",
+        "tgt",
+        "as-rep roasting",
+        "petitpotam",
+        "pre-auth"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 4768: A Kerberos Authentication Ticket (TGT) was requested. Sigma Detections: AS-REP Roasting (pre-auth disabled), PetitPotam coerced authentication against Domain Controller."
+    },
+    {
+      "id": "sigma_rules.json#5156",
+      "event_id": "5156",
+      "name": "Event 5156 - WFP Connection Permitted",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "5156",
+        "wfp",
+        "connection",
+        "rdp tunnel",
+        "reverse tunnel",
+        "remote powershell"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 5156: Windows Filtering Platform permitted an outbound network connection. Sigma Detections: Outbound Kerberos from unusual hosts, RDP reverse tunneling, remote PowerShell sessions (WinRM 5985)."
+    },
+    {
+      "id": "sigma_rules.json#4719",
+      "event_id": "4719",
+      "name": "Event 4719 - System Audit Policy Changed",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4719",
+        "audit policy",
+        "audit disabled",
+        "evasion",
+        "defense evasion"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 4719: System audit policy was modified. Sigma Detections: Disabling audit logging for logon, privilege use, or process creation categories to blind SOC detection."
+    },
+    {
+      "id": "sigma_rules.json#4769",
+      "event_id": "4769",
+      "name": "Event 4769 - Kerberos Service Ticket (TGS) Request",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4769",
+        "kerberos",
+        "tgs",
+        "kerberoasting",
+        "rc4",
+        "spn"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 4769: A Kerberos Service Ticket (TGS) was requested. Sigma Detections: Kerberoasting activity (ticket encryption type 0x17 requested for high-value SPNs like MSSQLSvc)."
+    },
+    {
+      "id": "sigma_rules.json#2004",
+      "event_id": "2004",
+      "name": "Event 2004 - Windows Firewall Rule Added",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "2004",
+        "firewall rule",
+        "port open",
+        "inbound rule",
+        "wmiprvse"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 2004: A rule has been added to the Windows Defender Firewall exception list. Sigma Detections: Inbound rule added for binaries in %TEMP% or %APPDATA%, rule created via WMI (WmiPrvSE)."
+    },
+    {
+      "id": "sigma_rules.json#2071",
+      "event_id": "2071",
+      "name": "Event 2071 - Windows Firewall Rule Modification",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "2071",
+        "firewall",
+        "modified rule",
+        "rule change",
+        "firewall bypass"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 2071: Windows Defender Firewall rule settings were modified. Sigma Detections: Firewall port opening for remote administrative tools, backdoor listener enablement."
+    },
+    {
+      "id": "sigma_rules.json#2097",
+      "event_id": "2097",
+      "name": "Event 2097 - Windows Firewall State Transition",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "2097",
+        "firewall",
+        "state change",
+        "disabled firewall"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 2097: Windows Firewall rule operational status changed. Sigma Detections: Disabling firewall enforcement for public or private network profiles."
+    },
+    {
+      "id": "sigma_rules.json#2008",
+      "event_id": "2008",
+      "name": "Event 2008 - Firewall Setting Changed / KDC Cert Mapping",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "2008",
+        "firewall setting",
+        "kdc cert",
+        "kdcsvc",
+        "certificate mapping"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 2008: Firewall global configuration modified or KDC certificate used without strong mapping. Sigma Detections: Potential certificate-based authentication coercion or firewall profile degradation."
+    },
+    {
+      "id": "sigma_rules.json#7036",
+      "event_id": "7036",
+      "name": "Event 7036 - Service State Changed",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "7036",
+        "service stopped",
+        "service started",
+        "defender disabled",
+        "hacktools"
+      ],
+      "sigma_rule_count": 3,
+      "content": "Windows Event 7036: A service entered the stopped or running state. Sigma Detections: Windows Defender (WinDefend) stopped, remote access tools (AnyDesk, TeamViewer) started unexpectedly."
+    },
+    {
+      "id": "sigma_rules.json#28115",
+      "event_id": "28115",
+      "name": "Event 28115 - Shell Core Suspicious Package",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "28115",
+        "shell package",
+        "appx",
+        "sideload",
+        "persistence"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 28115: Shell core package registration. Sigma Detections: Installation of unauthorized or suspicious AppX packages designed to persist across user sessions."
+    },
+    {
+      "id": "sigma_rules.json#8004",
+      "event_id": "8004",
+      "name": "Event 8004 - AppLocker Blocked / NTLM Brute Force",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "8004",
+        "applocker",
+        "application blocked",
+        "ntlm brute force"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 8004: AppLocker prevented an application from running or NTLM brute force threshold exceeded. Sigma Detections: Execution of blocked script/binary in temp path, NTLM authentication floods."
+    },
+    {
+      "id": "sigma_rules.json#400",
+      "event_id": "400",
+      "name": "Event 400 - PowerShell Engine Started / AppX Package",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "400",
+        "powershell engine",
+        "engine started",
+        "appx deployment"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 400: PowerShell engine lifecycle started or full-trust AppX package installation. Sigma Detections: Malicious AppX package deployments, unexpected background PowerShell engine initialization."
+    },
+    {
+      "id": "sigma_rules.json#401",
+      "event_id": "401",
+      "name": "Event 401 - PowerShell Engine Stopped / AppX Failed Signing",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "401",
+        "powershell engine",
+        "appx deployment",
+        "signing failed"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 401: PowerShell engine stopped or AppX package deployment failed signing requirements. Sigma Detections: Attempted execution of unsigned or forged packages."
+    },
+    {
+      "id": "sigma_rules.json#5447",
+      "event_id": "5447",
+      "name": "Event 5447 - WFP Filter Modifying EDR Silencer",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "5447",
+        "wfp filter",
+        "edr silencer",
+        "nofilter",
+        "tampering"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 5447: A Windows Filtering Platform filter was modified. Sigma Detections: EDR-Silencer or NoFilter hacktools manipulating WFP to block security agents from communicating with cloud telemetry."
+    },
+    {
+      "id": "sigma_rules.json#4673",
+      "event_id": "4673",
+      "name": "Event 4673 - Sensitive Privilege Service Called",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "4673",
+        "privileged service",
+        "lsaregisterlogonprocess",
+        "driver loaded",
+        "privilege use"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 4673: A privileged service was called. Sigma Detections: Non-system process attempting to call LsaRegisterLogonProcess (mimikatz DCSync setup) or loading user-mode drivers."
+    },
+    {
+      "id": "sigma_rules.json#4648",
+      "event_id": "4648",
+      "name": "Event 4648 - Logon Attempt with Explicit Credentials",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4648",
+        "explicit credentials",
+        "runas",
+        "lateral movement",
+        "secondary logon"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 4648: A logon was attempted using explicit credentials. Sigma Detections: Abuse of RunAs to execute tools under a domain admin account, lateral movement to domain controllers."
+    },
+    {
+      "id": "sigma_rules.json#4699",
+      "event_id": "4699",
+      "name": "Event 4699 - Scheduled Task Deleted",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "4699",
+        "task deleted",
+        "task disabled",
+        "scheduled task",
+        "defense evasion"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 4699: A scheduled task was deleted or disabled. Sigma Detections: Attackers removing backup/security monitoring tasks to avoid automated detection or forensic recovery."
+    },
+    {
+      "id": "sigma_rules.json#4898",
+      "event_id": "4898",
+      "name": "Event 4898 - AD CS Certificate Template Vulnerable",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4898",
+        "adcs",
+        "certificate template",
+        "certipy",
+        "esc1",
+        "esc2"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 4898: Active Directory Certificate Services template configuration altered. Sigma Detections: Modification of certificate templates to introduce ESC1/ESC2 vulnerabilities (Enrollee Supplies Subject)."
+    },
+    {
+      "id": "sigma_rules.json#4899",
+      "event_id": "4899",
+      "name": "Event 4899 - AD CS Template Access Control Changed",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4899",
+        "adcs",
+        "certificate template",
+        "acl change",
+        "certipy",
+        "privilege escalation"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 4899: Active Directory Certificate Services template security altered. Sigma Detections: Granting standard users enrollment or write permissions on sensitive certificate templates."
+    },
+    {
+      "id": "sigma_rules.json#2003",
+      "event_id": "2003",
+      "name": "Event 2003 - Firewall Setting Change / USB Plugged",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "2003",
+        "firewall change",
+        "usb plugged",
+        "external device"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 2003: Windows Firewall setting changed or USB device plugged into endpoint. Sigma Detections: Unauthorized USB storage attached to sensitive endpoints."
+    },
+    {
+      "id": "sigma_rules.json#1121",
+      "event_id": "1121",
+      "name": "Event 1121 - Windows Defender ASR Rule Triggered",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1121",
+        "defender",
+        "asr",
+        "attack surface reduction",
+        "lsass access",
+        "psexec block"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 1121: Windows Defender Attack Surface Reduction (ASR) blocked an action. Sigma Detections: ASR blocked credential stealing from LSASS, blocked process creation from PSExec/WMI commands."
+    },
+    {
+      "id": "sigma_rules.json#1116",
+      "event_id": "1116",
+      "name": "Event 1116 - Windows Defender Malware Detected",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1116",
+        "defender",
+        "malware detected",
+        "threat",
+        "amsi",
+        "antivirus"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 1116: Windows Defender detected malware or potentially unwanted software. Sigma Detections: Real-time protection alert, AMSI detected obfuscated PowerShell/VBScript payload."
+    },
+    {
+      "id": "sigma_rules.json#5013",
+      "event_id": "5013",
+      "name": "Event 5013 - Defender Tamper Protection Triggered",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "5013",
+        "tamper protection",
+        "defender",
+        "tampering",
+        "antivirus disabled"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 5013: Windows Defender Tamper Protection detected and blocked an attempt to disable security features. Sigma Detections: Direct registry tampering to disable Microsoft Defender Antivirus."
+    },
+    {
+      "id": "sigma_rules.json#129",
+      "event_id": "129",
+      "name": "Event 129 - Task Scheduler LOLBIN Execution",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "129",
+        "task scheduler",
+        "lolbin",
+        "suspicious location",
+        "schtasks"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 129: Task Scheduler task execution from suspicious locations. Sigma Detections: Scheduled task executing living-off-the-land binaries (LOLBINs) from %TEMP% or public folders."
+    },
+    {
+      "id": "sigma_rules.json#201",
+      "event_id": "201",
+      "name": "Event 201 - Remote Access Tool / Sysinternals Execution",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "201",
+        "remote access",
+        "screenconnect",
+        "sysinternals",
+        "file transfer"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 201: App runtime execution of remote administration tools. Sigma Detections: Unauthorized ScreenConnect client execution, Sysinternals tool deployment by unauthorized users."
+    },
+    {
+      "id": "sigma_rules.json#1040",
+      "event_id": "1040",
+      "name": "Event 1040 - MSI Package Installation from Suspicious Path",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1040",
+        "msi install",
+        "msiexec",
+        "suspicious location",
+        "web install"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 1040: Windows Installer (MSI) installed an application. Sigma Detections: msiexec executing an installer hosted on remote web servers or located in %TEMP%."
+    },
+    {
+      "id": "sigma_rules.json#1042",
+      "event_id": "1042",
+      "name": "Event 1042 - MSI Package Termination",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1042",
+        "msi install",
+        "msiexec",
+        "package completed"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 1042: Windows Installer transaction completed. Sigma Detections: Installation of rogue software or remote management agents via MSI."
+    },
+    {
+      "id": "sigma_rules.json#1034",
+      "event_id": "1034",
+      "name": "Event 1034 - Application Removed / DHCP Error",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1034",
+        "application removed",
+        "dhcp config",
+        "system change"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 1034: Application uninstalled or DHCP client configuration failure. Sigma Detections: Uninstallation of endpoint protection agents or network spoofing indicators."
+    },
+    {
+      "id": "sigma_rules.json#1033",
+      "event_id": "1033",
+      "name": "Event 1033 - RMM Software Installed / DHCP Config",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1033",
+        "rmm",
+        "atera",
+        "remote management",
+        "dhcp"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 1033: Application installed or DHCP config updated. Sigma Detections: Silent installation of unauthorized RMM agents (Atera, AnyDesk) used by ransomware operators."
+    },
+    {
+      "id": "sigma_rules.json#1001",
+      "event_id": "1001",
+      "name": "Event 1001 - Application Crash / Crash Dump Created",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1001",
+        "crash dump",
+        "wer",
+        "msmpeng crash",
+        "system crash"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 1001: Windows Error Reporting crash dump generated. Sigma Detections: Exploitation attempts causing security services (MsMpEng, LSASS, Spoolsv) to crash repeatedly."
+    },
+    {
+      "id": "sigma_rules.json#325",
+      "event_id": "325",
+      "name": "Event 325 - ESENT Database NTDSUtil Abuse",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "325",
+        "esent",
+        "ntdsutil",
+        "ntds.dit",
+        "active directory dump"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 325: Extensible Storage Engine (ESENT) database access. Sigma Detections: Abuse of ntdsutil.exe to create an IFM (Install from Media) dump of ntds.dit to steal all domain password hashes."
+    },
+    {
+      "id": "sigma_rules.json#1000",
+      "event_id": "1000",
+      "name": "Event 1000 - Application Error / Process Crash",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1000",
+        "application error",
+        "crash",
+        "lsass crash",
+        "msmpeng crash"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 1000: Application error log. Sigma Detections: Crash of critical Windows security processes (lsass.exe, msmpeng.exe, svchost.exe) indicative of memory corruption or exploit attempts."
+    },
+    {
+      "id": "sigma_rules.json#18456",
+      "event_id": "18456",
+      "name": "Event 18456 - MS SQL Server Logon Failed",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "18456",
+        "mssql",
+        "sql logon failed",
+        "sa account",
+        "sql brute force"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 18456: Login failed for SQL Server user. Sigma Detections: High-frequency authentication failures targeting the SQL 'sa' account from external or untrusted IP addresses."
+    },
+    {
+      "id": "sigma_rules.json#7023",
+      "event_id": "7023",
+      "name": "Event 7023 - System Service Terminated with Error",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "7023",
+        "service terminated",
+        "service error",
+        "defender stopped"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 7023: The Service Control Manager reported that a service terminated with an error. Sigma Detections: Unexpected termination of endpoint protection or logging services."
+    },
+    {
+      "id": "sigma_rules.json#104",
+      "event_id": "104",
+      "name": "Event 104 - System Event Log Cleared",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "104",
+        "log cleared",
+        "system log",
+        "wevtutil",
+        "defense evasion"
+      ],
+      "sigma_rule_count": 2,
+      "content": "Windows Event 104: The System log file was cleared. Sigma Detections: Adversaries clearing event logs via wevtutil or PowerShell to destroy forensic traces."
+    },
+    {
+      "id": "sigma_rules.json#157",
+      "event_id": "157",
+      "name": "Event 157 - AppX Packaging Signature Invalid",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "157",
+        "appx signature",
+        "invalid signature",
+        "unsigned appx"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 157: AppX package signature verification failed. Sigma Detections: Tampered or forged AppX packages attempted to be loaded."
+    },
+    {
+      "id": "sigma_rules.json#1007",
+      "event_id": "1007",
+      "name": "Event 1007 - System Certificate Exported",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "1007",
+        "certificate exported",
+        "private key",
+        "certutil",
+        "credential theft"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 1007: Certificate Services client exported a private certificate key. Sigma Detections: Theft of machine authentication certificates or code signing keys."
+    },
+    {
+      "id": "sigma_rules.json#40300",
+      "event_id": "40300",
+      "name": "Event 40300 - Hybrid Connection Manager Service Active",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "40300",
+        "hybrid connection",
+        "azure relay",
+        "tunneling"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 40300: Hybrid Connection Manager operational event. Sigma Detections: Unauthorized cloud tunneling established out of an enterprise network."
+    },
+    {
+      "id": "sigma_rules.json#40301",
+      "event_id": "40301",
+      "name": "Event 40301 - Hybrid Connection Relay Established",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "40301",
+        "hybrid connection",
+        "azure relay",
+        "cloud pivot"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 40301: Hybrid connection relay established. Sigma Detections: Persistent cloud relay channels created by internal threat actors."
+    },
+    {
+      "id": "sigma_rules.json#40302",
+      "event_id": "40302",
+      "name": "Event 40302 - Hybrid Connection State Terminated",
+      "domains": [
+        "network"
+      ],
+      "topics": [
+        "40302",
+        "hybrid connection",
+        "azure relay",
+        "tunnel termination"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 40302: Hybrid connection relay disconnected. Sigma Detections: Teardown of external relay connections."
+    },
+    {
+      "id": "sigma_rules.json#8003",
+      "event_id": "8003",
+      "name": "Event 8003 - AppLocker Warning (EXE)",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "8003",
+        "applocker",
+        "audit mode",
+        "would be blocked",
+        "untrusted exe"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 8003: AppLocker audit alert: executable would have been prevented from running. Sigma Detections: Executable running from temp directory during audit enforcement."
+    },
+    {
+      "id": "sigma_rules.json#8006",
+      "event_id": "8006",
+      "name": "Event 8006 - AppLocker Warning (Script)",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "8006",
+        "applocker",
+        "script warning",
+        "would be blocked",
+        "powershell"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 8006: AppLocker audit alert: script would have been prevented from running. Sigma Detections: Unauthorized .ps1, .vbs, or .bat script executed."
+    },
+    {
+      "id": "sigma_rules.json#8021",
+      "event_id": "8021",
+      "name": "Event 8021 - AppLocker Warning (MSI)",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "8021",
+        "applocker",
+        "msi warning",
+        "would be blocked",
+        "installer"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 8021: AppLocker audit alert: MSI installer would have been prevented from running. Sigma Detections: Installation of unauthorized software packages."
+    },
+    {
+      "id": "sigma_rules.json#8024",
+      "event_id": "8024",
+      "name": "Event 8024 - AppLocker Warning (DLL)",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "8024",
+        "applocker",
+        "dll warning",
+        "would be blocked",
+        "unsigned dll"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 8024: AppLocker audit alert: DLL would have been prevented from running. Sigma Detections: Rogue DLL injection or sideloading attempt."
+    },
+    {
+      "id": "sigma_rules.json#8007",
+      "event_id": "8007",
+      "name": "Event 8007 - AppLocker Enforced Block (Script)",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "8007",
+        "applocker",
+        "script blocked",
+        "blocked application"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 8007: AppLocker blocked a script from running. Sigma Detections: Malicious script blocked by policy in enterprise environment."
+    },
+    {
+      "id": "sigma_rules.json#8022",
+      "event_id": "8022",
+      "name": "Event 8022 - AppLocker Enforced Block (MSI)",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "8022",
+        "applocker",
+        "msi blocked",
+        "blocked installer"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 8022: AppLocker blocked an MSI package from running. Sigma Detections: Unauthorized software installation blocked."
+    },
+    {
+      "id": "sigma_rules.json#8025",
+      "event_id": "8025",
+      "name": "Event 8025 - AppLocker Enforced Block (DLL)",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "8025",
+        "applocker",
+        "dll blocked",
+        "blocked dll"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 8025: AppLocker blocked a DLL from loading. Sigma Detections: Blocked DLL sideloading attempt."
+    },
+    {
+      "id": "sigma_rules.json#603",
+      "event_id": "603",
+      "name": "Event 603 - Unsigned Package Installation",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "603",
+        "unsigned package",
+        "appx",
+        "sideload"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 603: Unsigned AppX package installation attempted. Sigma Detections: Attempt to deploy untrusted application package bypassing policy."
+    },
+    {
+      "id": "sigma_rules.json#441",
+      "event_id": "441",
+      "name": "Event 441 - AppX Deployment Policy Block",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "441",
+        "appx block",
+        "policy block",
+        "deployment blocked"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 441: AppX deployment blocked by administrative policy. Sigma Detections: Attempted installation of disallowed Windows store package."
+    },
+    {
+      "id": "sigma_rules.json#442",
+      "event_id": "442",
+      "name": "Event 442 - AppX Package License Failure",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "442",
+        "appx license",
+        "policy block",
+        "sideload fail"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 442: AppX package license check failed. Sigma Detections: Sideloaded malicious package rejected by OS licensing engine."
+    },
+    {
+      "id": "sigma_rules.json#453",
+      "event_id": "453",
+      "name": "Event 453 - AppX Deployment Blocked by AppLocker",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "453",
+        "appx applocker",
+        "deployment block",
+        "applocker"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 453: AppX deployment rejected by AppLocker policy. Sigma Detections: Sideloaded payload prevented from deploying."
+    },
+    {
+      "id": "sigma_rules.json#454",
+      "event_id": "454",
+      "name": "Event 454 - AppX Registration Blocked",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "454",
+        "appx registration",
+        "blocked",
+        "policy"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 454: AppX package registration blocked. Sigma Detections: Application blocked by system policy."
+    },
+    {
+      "id": "sigma_rules.json#412",
+      "event_id": "412",
+      "name": "Event 412 - AppX Deployment AppLocker Enforced",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "412",
+        "appx",
+        "applocker",
+        "package blocked"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 412: AppX deployment blocked by AppLocker package rules. Sigma Detections: Enforcement against unauthorized package deployment."
+    },
+    {
+      "id": "sigma_rules.json#5137",
+      "event_id": "5137",
+      "name": "Event 5137 - Directory Service Object Created",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "5137",
+        "directory object",
+        "dns coercion",
+        "ad object created"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 5137: A directory service object was created. Sigma Detections: Coerced authentication via rogue DNS object creation in Active Directory."
+    },
+    {
+      "id": "sigma_rules.json#5441",
+      "event_id": "5441",
+      "name": "Event 5441 - WFP Filter Installed by EDR Silencer",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "5441",
+        "wfp filter",
+        "edr silencer",
+        "nofilter",
+        "tampering"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 5441: A Windows Filtering Platform filter was added. Sigma Detections: EDR-Silencer hacktool adding persistent filters to suppress EDR alerting."
+    },
+    {
+      "id": "sigma_rules.json#5038",
+      "event_id": "5038",
+      "name": "Event 5038 - Code Integrity Invalid Hash",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "5038",
+        "code integrity",
+        "invalid hash",
+        "tampered file",
+        "driver"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 5038: Code integrity determined that the image hash of a file is not valid. Sigma Detections: Modified system binary, patched driver, or injected DLL."
+    },
+    {
+      "id": "sigma_rules.json#6281",
+      "event_id": "6281",
+      "name": "Event 6281 - Code Integrity Page Hash Failure",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "6281",
+        "code integrity",
+        "page hash",
+        "driver tampering"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 6281: Code Integrity determined that page hashes of an image file are not valid. Sigma Detections: In-memory or on-disk tampering with driver binaries."
+    },
+    {
+      "id": "sigma_rules.json#6416",
+      "event_id": "6416",
+      "name": "Event 6416 - External Device Recognized",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "6416",
+        "external device",
+        "removable device",
+        "usb",
+        "badusb"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 6416: A new external device was recognized by the system. Sigma Detections: Suspicious HID device (Rubber Ducky / BadUSB) or unauthorized USB storage."
+    },
+    {
+      "id": "sigma_rules.json#4800",
+      "event_id": "4800",
+      "name": "Event 4800 - Workstation Locked",
+      "domains": [
+        "ad"
+      ],
+      "topics": [
+        "4800",
+        "workstation locked",
+        "screen lock"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 4800: The workstation was locked. Sigma Detections: Activity occurring while workstation was supposedly locked (anomalous logon or script execution)."
+    },
+    {
+      "id": "sigma_rules.json#4658",
+      "event_id": "4658",
+      "name": "Event 4658 - Handle to Object Closed (SDelete)",
+      "domains": [
+        "endpoint"
+      ],
+      "topics": [
+        "4658",
+        "handle closed",
+        "sdelete",
+        "file wiping",
+        "timestomp"
+      ],
+      "sigma_rule_count": 1,
+      "content": "Windows Event 4658: The handle to an object was closed. Sigma Detections: File wiping patterns (Sysinternals SDelete) where handles are repeatedly opened and closed with zero bytes."
+    }
+  ]
+}

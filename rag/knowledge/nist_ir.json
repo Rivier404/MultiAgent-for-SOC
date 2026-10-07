@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "source": {
+    "title": "NIST SP 800-61r3 - Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+    "date": "April 2025",
+    "doi": "https://doi.org/10.6028/NIST.SP.800-61r3",
+    "source_file_sha256": "e5593d6bb85daecec7e8d9549400c7b3473bcc3f06e469c82218073afa7fba2d"
+  },
+  "documents": [
+    {
+      "id": "nist-incident-boundary",
+      "page": 2,
+      "topics": ["event", "incident", "analysis", "evidence"],
+      "domains": ["ad", "endpoint", "network", "web", "correlation"],
+      "content": "Within this document, an event is any observable occurrence that involves computing assets, including physical and virtual platforms, networks, services, and cloud environments. Additional analysis is often needed to determine whether adverse cybersecurity events indicate that a cybersecurity incident has occurred."
+    },
+    {
+      "id": "nist-ir-lifecycle",
+      "page": 5,
+      "topics": ["detect", "respond", "recover", "incident response"],
+      "domains": ["correlation"],
+      "content": "Detect (DE): Possible cybersecurity attacks and compromises are found and analyzed. Respond (RS): Actions regarding a detected cybersecurity incident are taken. Recover (RC): Assets and operations affected by a cybersecurity incident are restored."
+    },
+    {
+      "id": "nist-playbooks",
+      "page": 9,
+      "topics": ["playbook", "procedures", "response"],
+      "domains": ["ad", "endpoint", "network", "web", "correlation"],
+      "content": "Many organizations choose to create playbooks as part of documenting their procedures. Playbooks provide actionable steps or tasks for people to perform during various scenarios or situations. Formatting procedures within a playbook instead of another format can improve their usability."
+    },
+    {
+      "id": "nist-correlation",
+      "page": 25,
+      "topics": ["correlation", "siem", "soar", "multiple sources"],
+      "domains": ["correlation", "network", "ad", "endpoint", "web"],
+      "content": "Information is correlated from multiple sources. Use event correlation technology (e.g., SIEM, SOAR) to gather pieces of related data captured by multiple sources. Utilize CTI to help correlate events among log sources."
+    },
+    {
+      "id": "nist-impact-scope",
+      "page": 26,
+      "topics": ["impact", "scope", "triage", "severity"],
+      "domains": ["correlation"],
+      "content": "The estimated impact and scope of adverse events are understood. Estimate the impact and scope of adverse events through automated (e.g., SIEM, SOAR) and/or manual means, and review and refine the estimates."
+    },
+    {
+      "id": "nist-risk-factors",
+      "page": 27,
+      "topics": ["asset criticality", "functional impact", "data impact", "attack stage", "recoverability"],
+      "domains": ["correlation"],
+      "content": "Examples of possible risk evaluation factors include asset criticality, functional impact of the incident, data impact of the incident, stage of observed activity, threat actor characterization, and recoverability."
+    },
+    {
+      "id": "nist-prioritization",
+      "page": 28,
+      "topics": ["prioritization", "impact", "scope", "escalation"],
+      "domains": ["correlation"],
+      "content": "Prioritize how quickly incident response should be performed for each incident based on its scope, likely impact, time-critical nature, and resource availability. Incidents are escalated or elevated as needed."
+    }
+  ]
+}

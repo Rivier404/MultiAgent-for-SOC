@@ -1,0 +1,651 @@
+{
+  "schema_version": 1,
+  "purpose": "Candidate discovery only. Never treat these IDs as authoritative. scripts/update_event_ids_from_microsoft.py keeps an ID only after a Microsoft Learn event page is fetched and parsed successfully.",
+  "source_archive_sha256": "98b48a779dfd4c678b98c05048c913e1c903998cfd68b7d4fe215e242322e8d6",
+  "candidates": [
+    {
+      "event_id": "7045",
+      "sigma_rule_count": 41,
+      "example_rules": [
+        "rules/windows/builtin/system/service_control_manager/win_system_service_install_susp.yml",
+        "rules/windows/builtin/system/service_control_manager/win_system_service_install_remcom.yml",
+        "rules/windows/builtin/system/service_control_manager/win_system_susp_service_installation_folder.yml"
+      ]
+    },
+    {
+      "event_id": "4697",
+      "sigma_rule_count": 21,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_invoke_obfuscation_via_use_clip_services_security.yml",
+        "rules/windows/builtin/security/win_security_mal_creddumper.yml",
+        "rules/windows/builtin/security/win_security_metasploit_or_impacket_smb_psexec_service_install.yml"
+      ]
+    },
+    {
+      "event_id": "5145",
+      "sigma_rule_count": 17,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_smb_file_creation_admin_shares.yml",
+        "rules/windows/builtin/security/win_security_susp_raccess_sensitive_fext.yml",
+        "rules/windows/builtin/security/win_security_susp_group_policy_startup_script_added_to_gpo.yml"
+      ]
+    },
+    {
+      "event_id": "4624",
+      "sigma_rule_count": 15,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_metasploit_authentication.yml",
+        "rules/windows/builtin/security/win_security_alert_ruler.yml",
+        "rules/windows/builtin/security/account_management/win_security_susp_rottenpotato.yml"
+      ]
+    },
+    {
+      "event_id": "4663",
+      "sigma_rule_count": 14,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_mal_wceaux_dll.yml",
+        "rules/windows/builtin/security/win_security_aadhealth_mon_agent_regkey_access.yml",
+        "rules/windows/builtin/security/win_security_iso_mount.yml"
+      ]
+    },
+    {
+      "event_id": "4656",
+      "sigma_rule_count": 12,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_mal_wceaux_dll.yml",
+        "rules/windows/builtin/security/win_security_aadhealth_mon_agent_regkey_access.yml",
+        "rules/windows/builtin/security/win_security_sdelete_potential_secure_deletion.yml"
+      ]
+    },
+    {
+      "event_id": "5136",
+      "sigma_rule_count": 12,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_group_policy_startup_script_added_to_gpo.yml",
+        "rules/windows/builtin/security/win_security_kerberos_coercion_via_dns_object.yml",
+        "rules/windows/builtin/security/win_security_account_backdoor_dcsync_rights.yml"
+      ]
+    },
+    {
+      "event_id": "4662",
+      "sigma_rule_count": 7,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_dpapi_domain_backupkey_extraction.yml",
+        "rules/windows/builtin/security/win_security_wmi_persistence.yml",
+        "rules/windows/builtin/security/win_security_kerberos_coercion_via_dns_object.yml"
+      ]
+    },
+    {
+      "event_id": "3008",
+      "sigma_rule_count": 6,
+      "example_rules": [
+        "rules/windows/builtin/dns_client/win_dns_client_mega_nz.yml",
+        "rules/windows/builtin/dns_client/win_dns_client_anonymfiles_com.yml",
+        "rules/windows/builtin/dns_client/win_dns_client_mal_cobaltstrike.yml"
+      ]
+    },
+    {
+      "event_id": "4657",
+      "sigma_rule_count": 6,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_net_ntlm_downgrade.yml",
+        "rules/windows/builtin/security/win_security_windows_defender_exclusions_registry_modified.yml",
+        "rules/windows/builtin/security/win_security_sysmon_channel_reference_deletion.yml"
+      ]
+    },
+    {
+      "event_id": "4720",
+      "sigma_rule_count": 5,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_local_anon_logon_created.yml",
+        "rules/windows/builtin/security/win_security_hidden_user_creation.yml",
+        "rules/windows/builtin/security/win_security_user_creation.yml"
+      ]
+    },
+    {
+      "event_id": "16403",
+      "sigma_rule_count": 5,
+      "example_rules": [
+        "rules/windows/builtin/bits_client/win_bits_client_new_transfer_via_uncommon_tld.yml",
+        "rules/windows/builtin/bits_client/win_bits_client_new_transfer_via_ip_address.yml",
+        "rules/windows/builtin/bits_client/win_bits_client_new_transfer_via_file_sharing_domains.yml"
+      ]
+    },
+    {
+      "event_id": "5007",
+      "sigma_rule_count": 5,
+      "example_rules": [
+        "rules/windows/builtin/windefend/win_defender_config_change_exploit_guard_tamper.yml",
+        "rules/windows/builtin/windefend/win_defender_config_change_exploit_guard_tamper.yml",
+        "rules/windows/builtin/windefend/win_defender_suspicious_features_tampering.yml"
+      ]
+    },
+    {
+      "event_id": "33205",
+      "sigma_rule_count": 5,
+      "example_rules": [
+        "rules/windows/builtin/application/mssqlserver/win_mssql_xp_cmdshell_audit_log.yml",
+        "rules/windows/builtin/application/mssqlserver/win_mssql_disable_audit_settings.yml",
+        "rules/windows/builtin/application/mssqlserver/win_mssql_add_sysadmin_account.yml"
+      ]
+    },
+    {
+      "event_id": "4625",
+      "sigma_rule_count": 4,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_failed_logon_reasons.yml",
+        "rules/windows/builtin/security/win_security_metasploit_authentication.yml",
+        "rules/windows/builtin/security/win_security_alert_ruler.yml"
+      ]
+    },
+    {
+      "event_id": "854",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_appx_package_in_staging_directory.yml",
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_appx_downloaded_from_file_sharing_domains.yml",
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_uncommon_package_locations.yml"
+      ]
+    },
+    {
+      "event_id": "4738",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_alert_enable_weak_encryption.yml",
+        "rules/windows/builtin/security/win_security_susp_add_sid_history.yml",
+        "rules/windows/builtin/security/win_security_alert_ad_user_backdoors.yml"
+      ]
+    },
+    {
+      "event_id": "5379",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_opened_encrypted_zip_filename.yml",
+        "rules/windows/builtin/security/win_security_susp_opened_encrypted_zip.yml",
+        "rules/windows/builtin/security/win_security_susp_opened_encrypted_zip_outlook.yml"
+      ]
+    },
+    {
+      "event_id": "4776",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_failed_logon_reasons.yml",
+        "rules/windows/builtin/security/win_security_metasploit_authentication.yml",
+        "rules/windows/builtin/security/win_security_alert_ruler.yml"
+      ]
+    },
+    {
+      "event_id": "4661",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_net_recon_activity.yml",
+        "rules/windows/builtin/security/win_security_account_discovery.yml",
+        "rules/windows/builtin/security/win_security_password_policy_enumerated.yml"
+      ]
+    },
+    {
+      "event_id": "4768",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_petitpotam_susp_tgt_request.yml",
+        "rules/windows/builtin/security/win_security_kerberos_asrep_roasting.yml",
+        "rules/windows/builtin/security/win_security_susp_kerberos_manipulation.yml"
+      ]
+    },
+    {
+      "event_id": "5156",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_outbound_kerberos_connection.yml",
+        "rules/windows/builtin/security/win_security_rdp_reverse_tunnel.yml",
+        "rules/windows/builtin/security/win_security_remote_powershell_session.yml"
+      ]
+    },
+    {
+      "event_id": "4719",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_disable_event_auditing_critical.yml",
+        "rules/windows/builtin/security/win_security_disable_event_auditing_critical.yml",
+        "rules/windows/builtin/security/win_security_disable_event_auditing.yml"
+      ]
+    },
+    {
+      "event_id": "4769",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_rc4_kerberos.yml",
+        "rules/windows/builtin/security/win_security_susp_kerberos_manipulation.yml",
+        "rules/windows/builtin/security/win_security_kerberoasting_activity.yml"
+      ]
+    },
+    {
+      "event_id": "2004",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule_susp_folder.yml",
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule_wmiprvse.yml",
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule.yml"
+      ]
+    },
+    {
+      "event_id": "2071",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule_susp_folder.yml",
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule_wmiprvse.yml",
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule.yml"
+      ]
+    },
+    {
+      "event_id": "2097",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule_susp_folder.yml",
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule_wmiprvse.yml",
+        "rules/windows/builtin/firewall_as/win_firewall_as_add_rule.yml"
+      ]
+    },
+    {
+      "event_id": "2008",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/firewall_as/win_firewall_as_setting_change.yml",
+        "rules/windows/builtin/system/microsoft_windows_kerberos_key_distribution_center/win_system_kdcsvc_cert_use_no_strong_mapping.yml",
+        "rules/windows/builtin/system/microsoft_windows_kerberos_key_distribution_center/win_system_kdcsvc_cert_use_no_strong_mapping.yml"
+      ]
+    },
+    {
+      "event_id": "7036",
+      "sigma_rule_count": 3,
+      "example_rules": [
+        "rules/windows/builtin/system/service_control_manager/win_system_service_install_hacktools.yml",
+        "rules/windows/builtin/system/service_control_manager/win_system_service_install_remote_access_software.yml",
+        "rules/windows/builtin/system/service_control_manager/win_system_defender_disabled.yml"
+      ]
+    },
+    {
+      "event_id": "28115",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/shell_core/win_shell_core_susp_packages_installed.yml",
+        "rules/windows/builtin/shell_core/win_shell_core_susp_packages_installed.yml"
+      ]
+    },
+    {
+      "event_id": "8004",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/applocker/win_applocker_application_was_prevented_from_running.yml",
+        "rules/windows/builtin/ntlm/win_susp_ntlm_brute_force.yml"
+      ]
+    },
+    {
+      "event_id": "400",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_mal_appx_names.yml",
+        "rules/windows/builtin/appxdeployment_server/win_appxpackaging_server_full_trust_package_installation.yml"
+      ]
+    },
+    {
+      "event_id": "401",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_mal_appx_names.yml",
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_appx_package_deployment_failed_signing_requirements.yml"
+      ]
+    },
+    {
+      "event_id": "5447",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_hktl_edr_silencer.yml",
+        "rules/windows/builtin/security/win_security_hktl_nofilter.yml"
+      ]
+    },
+    {
+      "event_id": "4673",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_user_driver_loaded.yml",
+        "rules/windows/builtin/security/win_security_user_couldnt_call_priv_service_lsaregisterlogonprocess.yml"
+      ]
+    },
+    {
+      "event_id": "4648",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_logon_explicit_credentials.yml",
+        "rules/windows/builtin/security/win_security_explicit_credential_local_logon.yml"
+      ]
+    },
+    {
+      "event_id": "4699",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_susp_scheduled_task_delete_or_disable.yml",
+        "rules/windows/builtin/security/win_security_susp_scheduled_task_delete_or_disable.yml"
+      ]
+    },
+    {
+      "event_id": "4898",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_adcs_certificate_template_configuration_vulnerability_eku.yml",
+        "rules/windows/builtin/security/win_security_adcs_certificate_template_configuration_vulnerability.yml"
+      ]
+    },
+    {
+      "event_id": "4899",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_adcs_certificate_template_configuration_vulnerability_eku.yml",
+        "rules/windows/builtin/security/win_security_adcs_certificate_template_configuration_vulnerability.yml"
+      ]
+    },
+    {
+      "event_id": "2003",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/firewall_as/win_firewall_as_setting_change.yml",
+        "rules/windows/builtin/driverframeworks/win_usb_device_plugged.yml"
+      ]
+    },
+    {
+      "event_id": "1121",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/windefend/win_defender_asr_lsass_access.yml",
+        "rules/windows/builtin/windefend/win_defender_asr_psexec_wmi.yml"
+      ]
+    },
+    {
+      "event_id": "1116",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/windefend/win_defender_malware_detected_amsi_source.yml",
+        "rules/windows/builtin/windefend/win_defender_threat.yml"
+      ]
+    },
+    {
+      "event_id": "5013",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/windefend/win_defender_tamper_protection_trigger.yml",
+        "rules/windows/builtin/windefend/win_defender_tamper_protection_trigger.yml"
+      ]
+    },
+    {
+      "event_id": "129",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/taskscheduler/win_taskscheduler_execution_from_susp_locations.yml",
+        "rules/windows/builtin/taskscheduler/win_taskscheduler_lolbin_execution_via_task_scheduler.yml"
+      ]
+    },
+    {
+      "event_id": "201",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/appmodel_runtime/win_appmodel_runtime_sysinternals_tools_appx_execution.yml",
+        "rules/windows/builtin/application/screenconnect/win_app_remote_access_tools_screenconnect_file_transfer.yml"
+      ]
+    },
+    {
+      "event_id": "1040",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/application/msiinstaller/win_msi_install_from_susp_locations.yml",
+        "rules/windows/builtin/application/msiinstaller/win_msi_install_from_web.yml"
+      ]
+    },
+    {
+      "event_id": "1042",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/application/msiinstaller/win_msi_install_from_susp_locations.yml",
+        "rules/windows/builtin/application/msiinstaller/win_msi_install_from_web.yml"
+      ]
+    },
+    {
+      "event_id": "1034",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/application/msiinstaller/win_builtin_remove_application.yml",
+        "rules/windows/builtin/system/microsoft_windows_dhcp_server/win_system_susp_dhcp_config_failed.yml"
+      ]
+    },
+    {
+      "event_id": "1033",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/application/msiinstaller/win_software_atera_rmm_agent_install.yml",
+        "rules/windows/builtin/system/microsoft_windows_dhcp_server/win_system_susp_dhcp_config.yml"
+      ]
+    },
+    {
+      "event_id": "1001",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/application/windows_error_reporting/win_application_msmpeng_crash_wer.yml",
+        "rules/windows/builtin/system/microsoft_windows_wer_systemerrorreporting/win_system_crash_dump_created.yml"
+      ]
+    },
+    {
+      "event_id": "325",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/application/esent/win_esent_ntdsutil_abuse_susp_location.yml",
+        "rules/windows/builtin/application/esent/win_esent_ntdsutil_abuse.yml"
+      ]
+    },
+    {
+      "event_id": "1000",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/application/application_error/win_application_error_msmpeng_crash.yml",
+        "rules/windows/builtin/application/application_error/win_application_error_lsass_crash.yml"
+      ]
+    },
+    {
+      "event_id": "18456",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/application/mssqlserver/win_mssql_failed_logon_from_external_network.yml",
+        "rules/windows/builtin/application/mssqlserver/win_mssql_failed_logon.yml"
+      ]
+    },
+    {
+      "event_id": "7023",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/system/service_control_manager/win_system_service_terminated_error_important.yml",
+        "rules/windows/builtin/system/service_control_manager/win_system_service_terminated_error_generic.yml"
+      ]
+    },
+    {
+      "event_id": "104",
+      "sigma_rule_count": 2,
+      "example_rules": [
+        "rules/windows/builtin/system/microsoft_windows_eventlog/win_system_eventlog_cleared.yml",
+        "rules/windows/builtin/system/microsoft_windows_eventlog/win_system_susp_eventlog_cleared.yml"
+      ]
+    },
+    {
+      "event_id": "157",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/appxpackaging_om/win_appxpackaging_om_sups_appx_signature.yml"
+      ]
+    },
+    {
+      "event_id": "1007",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/certificate_services_client_lifecycle_system/win_certificateservicesclient_lifecycle_system_cert_exported.yml"
+      ]
+    },
+    {
+      "event_id": "40300",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/servicebus/win_hybridconnectionmgr_svc_running.yml"
+      ]
+    },
+    {
+      "event_id": "40301",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/servicebus/win_hybridconnectionmgr_svc_running.yml"
+      ]
+    },
+    {
+      "event_id": "40302",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/servicebus/win_hybridconnectionmgr_svc_running.yml"
+      ]
+    },
+    {
+      "event_id": "8003",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/applocker/win_applocker_application_would_have_been_blocked.yml"
+      ]
+    },
+    {
+      "event_id": "8006",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/applocker/win_applocker_application_would_have_been_blocked.yml"
+      ]
+    },
+    {
+      "event_id": "8021",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/applocker/win_applocker_application_would_have_been_blocked.yml"
+      ]
+    },
+    {
+      "event_id": "8024",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/applocker/win_applocker_application_would_have_been_blocked.yml"
+      ]
+    },
+    {
+      "event_id": "8007",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/applocker/win_applocker_application_was_prevented_from_running.yml"
+      ]
+    },
+    {
+      "event_id": "8022",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/applocker/win_applocker_application_was_prevented_from_running.yml"
+      ]
+    },
+    {
+      "event_id": "8025",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/applocker/win_applocker_application_was_prevented_from_running.yml"
+      ]
+    },
+    {
+      "event_id": "603",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxpackaging_server_unsigned_package_installation.yml"
+      ]
+    },
+    {
+      "event_id": "441",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_policy_block.yml"
+      ]
+    },
+    {
+      "event_id": "442",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_policy_block.yml"
+      ]
+    },
+    {
+      "event_id": "453",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_policy_block.yml"
+      ]
+    },
+    {
+      "event_id": "454",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_policy_block.yml"
+      ]
+    },
+    {
+      "event_id": "412",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/appxdeployment_server/win_appxdeployment_server_applocker_block.yml"
+      ]
+    },
+    {
+      "event_id": "5137",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_kerberos_coercion_via_dns_object.yml"
+      ]
+    },
+    {
+      "event_id": "5441",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_hktl_edr_silencer.yml"
+      ]
+    },
+    {
+      "event_id": "5038",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_codeintegrity_check_failure.yml"
+      ]
+    },
+    {
+      "event_id": "6281",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_codeintegrity_check_failure.yml"
+      ]
+    },
+    {
+      "event_id": "6416",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_external_device.yml"
+      ]
+    },
+    {
+      "event_id": "4800",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_workstation_was_locked.yml"
+      ]
+    },
+    {
+      "event_id": "4658",
+      "sigma_rule_count": 1,
+      "example_rules": [
+        "rules/windows/builtin/security/win_security_sdelete_potential_secure_deletion.yml"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "ad": [
+    {
+      "agent": "ADAgent",
+      "event_code": null,
+      "impact_score": 1,
+      "severity": "LOW",
+      "verdict": "insufficient_evidence",
+      "reasoning": "The supplied telemetry does not contain enough grounded evidence for a stronger conclusion.",
+      "evidence": [
+        "event_code=1102"
+      ],
+      "recommended_actions": [],
+      "playbook_references": []
+    },
+    {
+      "agent": "ADAgent",
+      "event_code": null,
+      "impact_score": 1,
+      "severity": "LOW",
+      "verdict": "insufficient_evidence",
+      "reasoning": "The supplied telemetry does not contain enough grounded evidence for a stronger conclusion.",
+      "evidence": [
+        "event_code=4624"
+      ],
+      "recommended_actions": [],
+      "playbook_references": []
+    },
+    {
+      "agent": "ADAgent",
+      "event_code": null,
+      "impact_score": 1,
+      "severity": "LOW",
+      "verdict": "insufficient_evidence",
+      "reasoning": "The supplied telemetry does not contain enough grounded evidence for a stronger conclusion.",
+      "evidence": [
+        "event_code=4634"
+      ],
+      "recommended_actions": [],
+      "playbook_references": []
+    }
+  ],
+  "endpoint": [],
+  "network": [],
+  "web": [],
+  "unknown": []
+}
