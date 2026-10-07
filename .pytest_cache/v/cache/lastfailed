@@ -1,0 +1,5 @@
+{
+  "tests/test_pipeline.py::test_overall_source_catalog_and_routing": true,
+  "tests/test_pipeline.py::test_overall_analyze_and_batch_execution": true,
+  "scripts/deployment_test.py::test_deployment_smoke": true
+}
